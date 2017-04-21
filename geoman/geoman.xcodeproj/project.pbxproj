@@ -15,6 +15,8 @@
 		397903621EAA06C0009D0FE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 397903601EAA06C0009D0FE0 /* LaunchScreen.storyboard */; };
 		3979036D1EAA06C0009D0FE0 /* geomanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3979036C1EAA06C0009D0FE0 /* geomanTests.swift */; };
 		397903781EAA06C0009D0FE0 /* geomanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903771EAA06C0009D0FE0 /* geomanUITests.swift */; };
+		397903861EAA2684009D0FE0 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903851EAA2684009D0FE0 /* MainController.swift */; };
+		397903881EAA27FE009D0FE0 /* CreateGeofenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		397903731EAA06C0009D0FE0 /* geomanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = geomanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		397903771EAA06C0009D0FE0 /* geomanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = geomanUITests.swift; sourceTree = "<group>"; };
 		397903791EAA06C0009D0FE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		397903851EAA2684009D0FE0 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGeofenceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				397903601EAA06C0009D0FE0 /* LaunchScreen.storyboard */,
 				397903631EAA06C0009D0FE0 /* Info.plist */,
 				3979035B1EAA06C0009D0FE0 /* geoman.xcdatamodeld */,
+				397903851EAA2684009D0FE0 /* MainController.swift */,
+				397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */,
 			);
 			path = geoman;
 			sourceTree = "<group>";
@@ -262,6 +268,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				397903881EAA27FE009D0FE0 /* CreateGeofenceController.swift in Sources */,
+				397903861EAA2684009D0FE0 /* MainController.swift in Sources */,
 				397903571EAA06C0009D0FE0 /* ViewController.swift in Sources */,
 				397903551EAA06C0009D0FE0 /* AppDelegate.swift in Sources */,
 				3979035D1EAA06C0009D0FE0 /* geoman.xcdatamodeld in Sources */,
@@ -511,6 +519,7 @@
 				3979037E1EAA06C0009D0FE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3979037F1EAA06C0009D0FE0 /* Build configuration list for PBXNativeTarget "geomanTests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +528,7 @@
 				397903811EAA06C0009D0FE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		397903821EAA06C0009D0FE0 /* Build configuration list for PBXNativeTarget "geomanUITests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +537,7 @@
 				397903841EAA06C0009D0FE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
