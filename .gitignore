@@ -78,3 +78,8 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
+
+# Xcode stuff
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/
