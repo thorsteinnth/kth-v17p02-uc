@@ -21,21 +21,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i2d-uQ-QG0">
-                                <rect key="frame" x="16" y="72" width="343" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNp-uA-ruL">
+                                <rect key="frame" x="120" y="84" width="135" height="30"/>
                                 <state key="normal" title="btnCreateGeofence"/>
                                 <connections>
-                                    <action selector="onBtnCreateGeofencePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="i1G-1y-GRi"/>
-                                    <segue destination="6lG-Kd-ztR" kind="show" id="tam-sN-Pxz"/>
+                                    <segue destination="6lG-Kd-ztR" kind="show" id="PEE-NO-nVP"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="NNp-uA-ruL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="OBU-Zy-4Gt"/>
+                            <constraint firstItem="NNp-uA-ruL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kCw-Aq-gIw"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Geoman" id="C5c-5D-4mn"/>
                     <connections>
-                        <outlet property="btnCreateGeofence" destination="i2d-uQ-QG0" id="Wh6-XR-t9h"/>
+                        <outlet property="btnCreateGeofence" destination="NNp-uA-ruL" id="cod-f2-3wP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -54,18 +56,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lzy-bw-HN0">
-                                <rect key="frame" x="16" y="64" width="343" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lblCreateGeofence" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cF-PJ-PxI">
+                                <rect key="frame" x="116" y="84" width="143" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2cF-PJ-PxI" firstAttribute="top" secondItem="ld1-yo-gu2" secondAttribute="bottom" constant="20" id="QRp-nb-Xmo"/>
+                            <constraint firstItem="2cF-PJ-PxI" firstAttribute="centerX" secondItem="xUU-7E-b7n" secondAttribute="centerX" id="X9J-y4-kDa"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="lblTitle" destination="Lzy-bw-HN0" id="7Jd-PM-ewX"/>
+                        <outlet property="lblCreateGeofence" destination="2cF-PJ-PxI" id="APS-fz-Tgw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Mz-uQ-Daw" userLabel="First Responder" sceneMemberID="firstResponder"/>

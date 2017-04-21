@@ -10,11 +10,11 @@ import UIKit
 
 class CreateGeofenceController: UIViewController {
 	
-	@IBOutlet weak var lblTitle: UILabel!
+	@IBOutlet weak var lblCreateGeofence: UILabel!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		lblTitle.text = "Create geofence :)";
+		lblCreateGeofence.text = "Should create geofence here";
 	}
 	
 	override func didReceiveMemoryWarning() {

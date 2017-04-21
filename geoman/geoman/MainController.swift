@@ -14,16 +14,12 @@ class MainController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		btnCreateGeofence.setTitle("Create geofence :)", for: UIControlState.normal);
+		btnCreateGeofence.setTitle("Create geofence", for: UIControlState.normal);
 	}
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
-	}
-	
-	@IBAction func onBtnCreateGeofencePressed(_ sender: Any) {
-		print("test");
 	}
 }
 
