@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need access to your location to determine when you enter and exit geofences.</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>We need access to your calendar in order to display events for you at relevant locations.</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -28,6 +30,8 @@
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
+		<string>gps</string>
+		<string>location-services</string>
 		<string>armv7</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
