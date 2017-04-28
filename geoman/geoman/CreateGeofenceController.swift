@@ -53,9 +53,11 @@ class CreateGeofenceController: UIViewController {
 	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
 		// This gets called when we add an overlay to the MKMapView
 		if overlay is MapCircle {
-			let circleView = MKCircleRenderer(overlay: overlay)
-			circleView.strokeColor = (overlay as! MapCircle).color
-			return circleView
+			let circleRenderer = MKCircleRenderer(overlay: overlay)
+			circleRenderer.strokeColor = (overlay as! MapCircle).color
+			circleRenderer.fillColor = circleRenderer.strokeColor!.withAlphaComponent(0.1)
+			circleRenderer.lineWidth = 1
+			return circleRenderer
 		}
 		
 		// Unknown overlay type, return empty overlay renderer (can't return nil)
