@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		397903551EAA06C0009D0FE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903541EAA06C0009D0FE0 /* AppDelegate.swift */; };
-		397903571EAA06C0009D0FE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903561EAA06C0009D0FE0 /* ViewController.swift */; };
 		3979035A1EAA06C0009D0FE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 397903581EAA06C0009D0FE0 /* Main.storyboard */; };
 		3979035D1EAA06C0009D0FE0 /* geoman.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3979035B1EAA06C0009D0FE0 /* geoman.xcdatamodeld */; };
 		3979035F1EAA06C0009D0FE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3979035E1EAA06C0009D0FE0 /* Assets.xcassets */; };
@@ -18,6 +17,7 @@
 		397903861EAA2684009D0FE0 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903851EAA2684009D0FE0 /* MainController.swift */; };
 		397903881EAA27FE009D0FE0 /* CreateGeofenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */; };
 		39E69D7A1EB366B1002949C2 /* MapCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E69D791EB366B1002949C2 /* MapCircle.swift */; };
+		95F76E241EB244B1005BA590 /* SLDeparture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F76E231EB244B1005BA590 /* SLDeparture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +40,6 @@
 /* Begin PBXFileReference section */
 		397903511EAA06C0009D0FE0 /* geoman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = geoman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		397903541EAA06C0009D0FE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		397903561EAA06C0009D0FE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		397903591EAA06C0009D0FE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3979035C1EAA06C0009D0FE0 /* geoman.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = geoman.xcdatamodel; sourceTree = "<group>"; };
 		3979035E1EAA06C0009D0FE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,6 +54,7 @@
 		397903851EAA2684009D0FE0 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGeofenceController.swift; sourceTree = "<group>"; };
 		39E69D791EB366B1002949C2 /* MapCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCircle.swift; sourceTree = "<group>"; };
+		95F76E231EB244B1005BA590 /* SLDeparture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLDeparture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,8 +105,8 @@
 		397903531EAA06C0009D0FE0 /* geoman */ = {
 			isa = PBXGroup;
 			children = (
+				95F76E221EB24472005BA590 /* Model */,
 				397903541EAA06C0009D0FE0 /* AppDelegate.swift */,
-				397903561EAA06C0009D0FE0 /* ViewController.swift */,
 				397903581EAA06C0009D0FE0 /* Main.storyboard */,
 				3979035E1EAA06C0009D0FE0 /* Assets.xcassets */,
 				397903601EAA06C0009D0FE0 /* LaunchScreen.storyboard */,
@@ -135,6 +135,14 @@
 				397903791EAA06C0009D0FE0 /* Info.plist */,
 			);
 			path = geomanUITests;
+			sourceTree = "<group>";
+		};
+		95F76E221EB24472005BA590 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				95F76E231EB244B1005BA590 /* SLDeparture.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,10 +282,10 @@
 			files = (
 				397903881EAA27FE009D0FE0 /* CreateGeofenceController.swift in Sources */,
 				397903861EAA2684009D0FE0 /* MainController.swift in Sources */,
-				397903571EAA06C0009D0FE0 /* ViewController.swift in Sources */,
 				397903551EAA06C0009D0FE0 /* AppDelegate.swift in Sources */,
 				39E69D7A1EB366B1002949C2 /* MapCircle.swift in Sources */,
 				3979035D1EAA06C0009D0FE0 /* geoman.xcdatamodeld in Sources */,
+				95F76E241EB244B1005BA590 /* SLDeparture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
