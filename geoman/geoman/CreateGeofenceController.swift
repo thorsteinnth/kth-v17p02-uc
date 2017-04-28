@@ -7,16 +7,17 @@
 //
 
 import UIKit
+import MapKit
 import CoreLocation
 
 class CreateGeofenceController: UIViewController {
 	
-	@IBOutlet weak var lblCreateGeofence: UILabel!
+	@IBOutlet weak var mapView: MKMapView!
 	let locationManager = CLLocationManager()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		lblCreateGeofence.text = "Should create geofence here";
+		
 		// Location manager setup
 		self.locationManager.requestAlwaysAuthorization()
 		if (CLLocationManager.locationServicesEnabled()) {
@@ -24,6 +25,10 @@ class CreateGeofenceController: UIViewController {
 			locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
 			locationManager.startUpdatingLocation()
 		}
+		
+		// Map view setup
+		mapView.delegate = self
+		mapView.showsUserLocation = true
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -63,6 +68,18 @@ extension CreateGeofenceController: CLLocationManagerDelegate {
 		else {
 			print("CLLocationManager.didUpdateLocations - nil")
 		}
+	}
+}
+
+extension CreateGeofenceController: MKMapViewDelegate {
+	
+	// We use the mapview delegate to update the map
+	// It only updates the user's location when he moves, not continuously
+	// We could do it with the CLLocationManager, but the MKMapViewDelegate is easier
+	
+	func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+		print("MKMapViewDelegate - user location updated - \(userLocation)")
+		mapView.setCenter(userLocation.coordinate, animated: true)
 	}
 	
 }

@@ -56,21 +56,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lblCreateGeofence" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cF-PJ-PxI">
-                                <rect key="frame" x="116" y="84" width="143" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JIt-ks-tsv">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2cF-PJ-PxI" firstAttribute="top" secondItem="ld1-yo-gu2" secondAttribute="bottom" constant="20" id="QRp-nb-Xmo"/>
-                            <constraint firstItem="2cF-PJ-PxI" firstAttribute="centerX" secondItem="xUU-7E-b7n" secondAttribute="centerX" id="X9J-y4-kDa"/>
+                            <constraint firstAttribute="trailing" secondItem="JIt-ks-tsv" secondAttribute="trailing" id="2Yc-zH-ewh"/>
+                            <constraint firstItem="JIt-ks-tsv" firstAttribute="bottom" secondItem="1q1-xx-mxl" secondAttribute="top" id="HqD-h2-lV3"/>
+                            <constraint firstItem="JIt-ks-tsv" firstAttribute="top" secondItem="ld1-yo-gu2" secondAttribute="bottom" id="PVw-md-WfT"/>
+                            <constraint firstItem="JIt-ks-tsv" firstAttribute="leading" secondItem="xUU-7E-b7n" secondAttribute="leading" id="RvM-be-MfD"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="lblCreateGeofence" destination="2cF-PJ-PxI" id="APS-fz-Tgw"/>
+                        <outlet property="mapView" destination="JIt-ks-tsv" id="4ln-U2-0HB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Mz-uQ-Daw" userLabel="First Responder" sceneMemberID="firstResponder"/>
