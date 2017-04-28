@@ -30,25 +30,17 @@ class CreateGeofenceController: UIViewController {
 		// Map view setup
 		mapView.delegate = self
 		mapView.showsUserLocation = true
-		drawTestCircleOnMap()
 		
 		// UIBarButtonItems
 		// User tracking button
 		let btnUserTracking = MKUserTrackingBarButtonItem(mapView: mapView)
-		// Add geofence button
-		let fontSize:CGFloat = 25;
-		let font:UIFont = UIFont.systemFont(ofSize: fontSize);
-		let attributes:[String : Any] = [NSFontAttributeName: font];
-		let btnAddGeofence = UIBarButtonItem.init();
-		btnAddGeofence.title = "+";
-		btnAddGeofence.setTitleTextAttributes(attributes, for: UIControlState.normal);
-		btnAddGeofence.target = self
-		btnAddGeofence.action = #selector(onAddGeofenceButtonPressed(sender:))
 		// Add buttons to nav bar
 		var navItemUIBarButtonItems = [UIBarButtonItem]()
 		navItemUIBarButtonItems.append(btnUserTracking)
-		navItemUIBarButtonItems.append(btnAddGeofence)
 		self.navigationItem.setRightBarButtonItems(navItemUIBarButtonItems, animated: false)
+		
+		let longpressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(onMapLongPress(sender:)))
+		mapView.addGestureRecognizer(longpressRecognizer)
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -56,12 +48,9 @@ class CreateGeofenceController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 	
-	func drawTestCircleOnMap() {
-		// Stockholm coordinates: 59,334591, 18,063240
-		let lat: CLLocationDegrees = 59.334591
-		let lon: CLLocationDegrees = 18.063240
-		let coordStockholm = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-		let mapCircle = MapCircle(center: coordStockholm, radius:1000)
+	func drawGeofenceOnMap(geofence: Geofence) {
+		// Geofences are circles
+		let mapCircle = MapCircle(center: geofence.center, radius: geofence.radius)
 		mapCircle.color = UIColor.blue
 		mapView.add(mapCircle)
 	}
@@ -80,9 +69,45 @@ class CreateGeofenceController: UIViewController {
 		return MKOverlayRenderer()
 	}
 	
-	func onAddGeofenceButtonPressed(sender: UIBarButtonItem) {
-		print("Should add geofence")
+	func onMapLongPress(sender: UILongPressGestureRecognizer) {
+		// Adapted from: https://stackoverflow.com/questions/14580269/get-tapped-coordinates-with-iphone-mapkit
+		
+		if sender.state != UIGestureRecognizerState.ended {
+			return
+		}
+		
+		let touchLocation = sender.location(in: mapView)
+		let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
+		
+		// Show add geofence alert
+		let alert = UIAlertController(
+			title: "Add geofence",
+			message: "Do you want to add a geofence here?",
+			preferredStyle: UIAlertControllerStyle.alert
+		)
+		alert.addAction(UIAlertAction(
+			title: "Yes",
+			style: UIAlertActionStyle.default,
+			handler: {(alert: UIAlertAction!) in self.createGeofence(center: locationCoordinate)})
+		)
+		alert.addAction(UIAlertAction(
+			title: "Cancel",
+			style: UIAlertActionStyle.cancel,
+			handler: nil)
+		)
+		self.present(alert, animated: true, completion: nil)
 	}
+	
+	func createGeofence(center: CLLocationCoordinate2D) {
+		// TODO Get radius from user
+		// TODO Make it an actual geofence
+		// TODO Save geofence to persistent storage
+		let radius: CLLocationDistance = 1000;
+		print("Creating geofence at \(center) with radius \(radius)")
+		let geofence = Geofence(center: center, radius: radius)
+		drawGeofenceOnMap(geofence: geofence)
+	}
+	
 }
 
 extension CreateGeofenceController: CLLocationManagerDelegate {
@@ -111,7 +136,7 @@ extension CreateGeofenceController: CLLocationManagerDelegate {
 		// The latest location is at the end of the array
 		if let latestLocation = locations.last {
 			// The latest location is not nil
-			print("CLLocationManager.didUpdateLocations: \(latestLocation)")
+			//print("CLLocationManager.didUpdateLocations: \(latestLocation)")
 		}
 		else {
 			print("CLLocationManager.didUpdateLocations: nil")
