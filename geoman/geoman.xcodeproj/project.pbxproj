@@ -107,14 +107,12 @@
 			children = (
 				95F76E221EB24472005BA590 /* Model */,
 				397903541EAA06C0009D0FE0 /* AppDelegate.swift */,
-				397903581EAA06C0009D0FE0 /* Main.storyboard */,
+				39E69D7C1EB38DA0002949C2 /* Storyboards */,
 				3979035E1EAA06C0009D0FE0 /* Assets.xcassets */,
-				397903601EAA06C0009D0FE0 /* LaunchScreen.storyboard */,
 				397903631EAA06C0009D0FE0 /* Info.plist */,
 				3979035B1EAA06C0009D0FE0 /* geoman.xcdatamodeld */,
 				39E69D7B1EB38D37002949C2 /* Map overlays */,
-				397903851EAA2684009D0FE0 /* MainController.swift */,
-				397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */,
+				39E69D7D1EB38DBC002949C2 /* Controllers */,
 			);
 			path = geoman;
 			sourceTree = "<group>";
@@ -143,6 +141,24 @@
 				39E69D791EB366B1002949C2 /* MapCircle.swift */,
 			);
 			name = "Map overlays";
+			sourceTree = "<group>";
+		};
+		39E69D7C1EB38DA0002949C2 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				397903581EAA06C0009D0FE0 /* Main.storyboard */,
+				397903601EAA06C0009D0FE0 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		39E69D7D1EB38DBC002949C2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				397903851EAA2684009D0FE0 /* MainController.swift */,
+				397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		95F76E221EB24472005BA590 /* Model */ = {
