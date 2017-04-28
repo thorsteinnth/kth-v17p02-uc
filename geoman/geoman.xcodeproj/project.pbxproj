@@ -17,6 +17,7 @@
 		397903781EAA06C0009D0FE0 /* geomanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903771EAA06C0009D0FE0 /* geomanUITests.swift */; };
 		397903861EAA2684009D0FE0 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903851EAA2684009D0FE0 /* MainController.swift */; };
 		397903881EAA27FE009D0FE0 /* CreateGeofenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */; };
+		95F76E241EB244B1005BA590 /* SLDeparture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F76E231EB244B1005BA590 /* SLDeparture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		397903791EAA06C0009D0FE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		397903851EAA2684009D0FE0 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGeofenceController.swift; sourceTree = "<group>"; };
+		95F76E231EB244B1005BA590 /* SLDeparture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLDeparture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		397903531EAA06C0009D0FE0 /* geoman */ = {
 			isa = PBXGroup;
 			children = (
+				95F76E221EB24472005BA590 /* Model */,
 				397903541EAA06C0009D0FE0 /* AppDelegate.swift */,
 				397903561EAA06C0009D0FE0 /* ViewController.swift */,
 				397903581EAA06C0009D0FE0 /* Main.storyboard */,
@@ -132,6 +135,14 @@
 				397903791EAA06C0009D0FE0 /* Info.plist */,
 			);
 			path = geomanUITests;
+			sourceTree = "<group>";
+		};
+		95F76E221EB24472005BA590 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				95F76E231EB244B1005BA590 /* SLDeparture.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +284,7 @@
 				397903571EAA06C0009D0FE0 /* ViewController.swift in Sources */,
 				397903551EAA06C0009D0FE0 /* AppDelegate.swift in Sources */,
 				3979035D1EAA06C0009D0FE0 /* geoman.xcdatamodeld in Sources */,
+				95F76E241EB244B1005BA590 /* SLDeparture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

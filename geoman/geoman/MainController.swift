@@ -25,5 +25,20 @@ class MainController: UIViewController {
 	@IBAction func onBtnCreateGeofencePressed(_ sender: Any) {
 		print("test");
 	}
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        getNextSLDepartures()
+        
+    }
+    
+    func getNextSLDepartures() {
+        
+        // Talk to the SL API
+        
+        SLDeparture.getDepartures(station: "Kista") { departures in
+            print("Here we should get the departures")
+        }
+    }
 }
 

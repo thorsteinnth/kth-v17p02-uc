@@ -1,10 +1,6 @@
-//
-//  ViewController.swift
-//  geoman
-//
-//  Created by Þorsteinn Þorri Sigurðsson on 21/04/2017.
-//  Copyright © 2017 ttsifannar. All rights reserved.
-//
+/*
+ * Just some test controller for calendar and API events - not final
+ */
 
 import UIKit
 import EventKit
@@ -27,12 +23,13 @@ class ViewController: UIViewController {
         // TODO:
         // we could maybe have a settings screen where the user could manage his events,
         // like which calender he want's to give access to and at what locations he would like to receive the calendar alerts?
+        
         getCalendarAccess()
         getCalendarEvents()
-        
     }
     
     func getCalendarAccess(){
+        
         let eventStore = EKEventStore()
         eventStore.requestAccess(to: EKEntityType.event, completion: {
             (accessGranted: Bool, error: Error?) in
@@ -46,6 +43,7 @@ class ViewController: UIViewController {
     }
     
     func getCalendarEvents() {
+        
         let eventStore = EKEventStore()
         
         let authorizationStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
@@ -75,7 +73,5 @@ class ViewController: UIViewController {
             }
         }
     }
-    
-    
 }
 
