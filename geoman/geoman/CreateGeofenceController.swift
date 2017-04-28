@@ -29,6 +29,8 @@ class CreateGeofenceController: UIViewController {
 		// Map view setup
 		mapView.delegate = self
 		mapView.showsUserLocation = true
+		let btnUserTracking = MKUserTrackingBarButtonItem(mapView: mapView)
+		self.navigationItem.setRightBarButton(btnUserTracking, animated: false)
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -56,17 +58,17 @@ extension CreateGeofenceController: CLLocationManagerDelegate {
 		default:
 			locationStatus = "Unknown location authorization status"
 		}
-		print("CLLocationManager.didChangeAuthorization - \(locationStatus)")
+		print("CLLocationManager.didChangeAuthorization: \(locationStatus)")
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		// The latest location is at the end of the array
 		if let latestLocation = locations.last {
 			// The latest location is not nil
-			print("CLLocationManager.didUpdateLocations - \(latestLocation)")
+			print("CLLocationManager.didUpdateLocations: \(latestLocation)")
 		}
 		else {
-			print("CLLocationManager.didUpdateLocations - nil")
+			print("CLLocationManager.didUpdateLocations: nil")
 		}
 	}
 }
@@ -78,7 +80,7 @@ extension CreateGeofenceController: MKMapViewDelegate {
 	// We could do it with the CLLocationManager, but the MKMapViewDelegate is easier
 	
 	func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-		print("MKMapViewDelegate - user location updated - \(userLocation)")
+		print("MKMapViewDelegate - user location updated: \(userLocation)")
 		mapView.setCenter(userLocation.coordinate, animated: true)
 	}
 	
