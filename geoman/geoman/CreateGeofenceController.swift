@@ -30,7 +30,6 @@ class CreateGeofenceController: UIViewController {
 		// Map view setup
 		mapView.delegate = self
 		mapView.showsUserLocation = true
-		drawTestCircleOnMap()
 		
 		// UIBarButtonItems
 		// User tracking button
@@ -49,12 +48,8 @@ class CreateGeofenceController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 	
-	func drawTestCircleOnMap() {
-		// Stockholm coordinates: 59,334591, 18,063240
-		let lat: CLLocationDegrees = 59.334591
-		let lon: CLLocationDegrees = 18.063240
-		let coordStockholm = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-		let mapCircle = MapCircle(center: coordStockholm, radius:1000)
+	func drawCircleOnMap(center: CLLocationCoordinate2D, radius: CLLocationDistance) {
+		let mapCircle = MapCircle(center: center, radius: radius)
 		mapCircle.color = UIColor.blue
 		mapView.add(mapCircle)
 	}
@@ -103,7 +98,11 @@ class CreateGeofenceController: UIViewController {
 	}
 	
 	func createGeofence(center: CLLocationCoordinate2D) {
-		print("Should create geofence at \(center)")
+		// TODO Get radius from user
+		// TODO Save geofence to persistent storage (and actually create a geofence object)
+		let radius: CLLocationDistance = 1000;
+		print("Creating geofence at \(center) with radius \(radius)")
+		drawCircleOnMap(center: center, radius: radius)
 	}
 	
 }
