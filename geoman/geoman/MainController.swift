@@ -14,7 +14,7 @@ class MainController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		btnCreateGeofence.setTitle("Create geofence :)", for: UIControlState.normal);
+		btnCreateGeofence.setTitle("Create geofence", for: UIControlState.normal);
 	}
 	
 	override func didReceiveMemoryWarning() {
