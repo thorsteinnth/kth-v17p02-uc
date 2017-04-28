@@ -13,6 +13,7 @@ import CoreLocation
 class CreateGeofenceController: UIViewController {
 	
 	@IBOutlet weak var mapView: MKMapView!
+	// TODO Move location manager to AppDelegate or special class/service
 	let locationManager = CLLocationManager()
 	
 	override func viewDidLoad() {
@@ -31,11 +32,34 @@ class CreateGeofenceController: UIViewController {
 		mapView.showsUserLocation = true
 		let btnUserTracking = MKUserTrackingBarButtonItem(mapView: mapView)
 		self.navigationItem.setRightBarButton(btnUserTracking, animated: false)
+		drawTestCircleOnMap()
 	}
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
+	}
+	
+	func drawTestCircleOnMap() {
+		// Stockholm coordinates: 59,334591, 18,063240
+		let lat: CLLocationDegrees = 59.334591
+		let lon: CLLocationDegrees = 18.063240
+		let coordStockholm = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+		let mapCircle = MapCircle(center: coordStockholm, radius:1000)
+		mapCircle.color = UIColor.blue
+		mapView.add(mapCircle)
+	}
+	
+	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+		// This gets called when we add an overlay to the MKMapView
+		if overlay is MapCircle {
+			let circleView = MKCircleRenderer(overlay: overlay)
+			circleView.strokeColor = (overlay as! MapCircle).color
+			return circleView
+		}
+		
+		// Unknown overlay type, return empty overlay renderer (can't return nil)
+		return MKOverlayRenderer()
 	}
 }
 

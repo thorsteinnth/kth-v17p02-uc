@@ -17,6 +17,7 @@
 		397903781EAA06C0009D0FE0 /* geomanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903771EAA06C0009D0FE0 /* geomanUITests.swift */; };
 		397903861EAA2684009D0FE0 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903851EAA2684009D0FE0 /* MainController.swift */; };
 		397903881EAA27FE009D0FE0 /* CreateGeofenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */; };
+		39E69D7A1EB366B1002949C2 /* MapCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E69D791EB366B1002949C2 /* MapCircle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		397903791EAA06C0009D0FE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		397903851EAA2684009D0FE0 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGeofenceController.swift; sourceTree = "<group>"; };
+		39E69D791EB366B1002949C2 /* MapCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCircle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				397903601EAA06C0009D0FE0 /* LaunchScreen.storyboard */,
 				397903631EAA06C0009D0FE0 /* Info.plist */,
 				3979035B1EAA06C0009D0FE0 /* geoman.xcdatamodeld */,
+				39E69D791EB366B1002949C2 /* MapCircle.swift */,
 				397903851EAA2684009D0FE0 /* MainController.swift */,
 				397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */,
 			);
@@ -202,6 +205,7 @@
 				TargetAttributes = {
 					397903501EAA06C0009D0FE0 = {
 						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = KPWT8GBWB7;
 						ProvisioningStyle = Automatic;
 					};
 					397903671EAA06C0009D0FE0 = {
@@ -272,6 +276,7 @@
 				397903861EAA2684009D0FE0 /* MainController.swift in Sources */,
 				397903571EAA06C0009D0FE0 /* ViewController.swift in Sources */,
 				397903551EAA06C0009D0FE0 /* AppDelegate.swift in Sources */,
+				39E69D7A1EB366B1002949C2 /* MapCircle.swift in Sources */,
 				3979035D1EAA06C0009D0FE0 /* geoman.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,7 +429,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KPWT8GBWB7;
 				INFOPLIST_FILE = geoman/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ttsifannar.geoman;
@@ -437,7 +442,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KPWT8GBWB7;
 				INFOPLIST_FILE = geoman/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ttsifannar.geoman;
