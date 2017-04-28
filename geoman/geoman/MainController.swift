@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EventKit
 
 class MainController: UIViewController {
 	
@@ -28,9 +29,12 @@ class MainController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
+        // Testing Calendar
+        getCalendarAccess()
+        getCalendarEvents()
+        
         // Testing getting departures from Trafiklab - SL API
         getNextSLDepartures()
-        
     }
     
     func getNextSLDepartures() {
@@ -54,6 +58,52 @@ class MainController: UIViewController {
                 print("Destination: " + departure.destination)
                 print("Time: " + departure.displayTime)
                 print("")
+            }
+        }
+    }
+    
+    func getCalendarAccess(){
+        
+        let eventStore = EKEventStore()
+        eventStore.requestAccess(to: EKEntityType.event, completion: {
+            (accessGranted: Bool, error: Error?) in
+            
+            if !accessGranted {
+                let alertController = UIAlertController(title: "Warning", message: "You need to allow access to the calendar in order to receive event notifications.", preferredStyle: .alert);
+                
+                self.present(alertController, animated: true){}
+            }
+        })
+    }
+    
+    func getCalendarEvents() {
+        
+        let eventStore = EKEventStore()
+        
+        let authorizationStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
+        
+        if authorizationStatus == EKAuthorizationStatus.authorized {
+            
+            let calendars = eventStore.calendars(for: EKEntityType.event)
+            
+            for calendar in calendars {
+                
+                // TODO : We could have a setting screen where the user selects which calender he want's to get notifications for
+                print(calendar.title)
+                if calendar.title == "Calendar" {
+                    
+                    let startDate = Date(timeIntervalSinceNow: 0)
+                    let endDate = Date(timeIntervalSinceNow: 12*3600)
+                    
+                    let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
+                    
+                    let events = eventStore.events(matching: predicate)
+                    
+                    for event in events {
+                        
+                        print("Event found: " + event.title)
+                    }
+                }
             }
         }
     }
