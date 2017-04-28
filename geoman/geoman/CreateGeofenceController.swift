@@ -30,9 +30,25 @@ class CreateGeofenceController: UIViewController {
 		// Map view setup
 		mapView.delegate = self
 		mapView.showsUserLocation = true
-		let btnUserTracking = MKUserTrackingBarButtonItem(mapView: mapView)
-		self.navigationItem.setRightBarButton(btnUserTracking, animated: false)
 		drawTestCircleOnMap()
+		
+		// UIBarButtonItems
+		// User tracking button
+		let btnUserTracking = MKUserTrackingBarButtonItem(mapView: mapView)
+		// Add geofence button
+		let fontSize:CGFloat = 25;
+		let font:UIFont = UIFont.systemFont(ofSize: fontSize);
+		let attributes:[String : Any] = [NSFontAttributeName: font];
+		let btnAddGeofence = UIBarButtonItem.init();
+		btnAddGeofence.title = "+";
+		btnAddGeofence.setTitleTextAttributes(attributes, for: UIControlState.normal);
+		btnAddGeofence.target = self
+		btnAddGeofence.action = #selector(onAddGeofenceButtonPressed(sender:))
+		// Add buttons to nav bar
+		var navItemUIBarButtonItems = [UIBarButtonItem]()
+		navItemUIBarButtonItems.append(btnUserTracking)
+		navItemUIBarButtonItems.append(btnAddGeofence)
+		self.navigationItem.setRightBarButtonItems(navItemUIBarButtonItems, animated: false)
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -62,6 +78,10 @@ class CreateGeofenceController: UIViewController {
 		
 		// Unknown overlay type, return empty overlay renderer (can't return nil)
 		return MKOverlayRenderer()
+	}
+	
+	func onAddGeofenceButtonPressed(sender: UIBarButtonItem) {
+		print("Should add geofence")
 	}
 }
 
