@@ -28,6 +28,7 @@ class MainController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
+        // Testing getting departures from Trafiklab - SL API
         getNextSLDepartures()
         
     }
@@ -36,8 +37,24 @@ class MainController: UIViewController {
         
         // Talk to the SL API
         
-        SLDeparture.getDepartures(station: "Kista") { departures in
-            print("Here we should get the departures")
+        // T-Centralen: 9001
+        // Odenplan: 9117
+        // Ropsten: 9220
+        // Kista: 9302
+        
+        SLDeparture.getDepartures(stationCode: "9302") { departures in
+            
+            if departures.count > 0 {
+                print("We got departures:")
+            }
+            
+            for departure in departures {
+                
+                print("Station: " + departure.station)
+                print("Destination: " + departure.destination)
+                print("Time: " + departure.displayTime)
+                print("")
+            }
         }
     }
 }
