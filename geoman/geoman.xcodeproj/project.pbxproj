@@ -17,6 +17,7 @@
 		397903861EAA2684009D0FE0 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903851EAA2684009D0FE0 /* MainController.swift */; };
 		397903881EAA27FE009D0FE0 /* CreateGeofenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */; };
 		39E69D7A1EB366B1002949C2 /* MapCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E69D791EB366B1002949C2 /* MapCircle.swift */; };
+		39E69D7F1EB38EAD002949C2 /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E69D7E1EB38EAD002949C2 /* Geofence.swift */; };
 		95F76E241EB244B1005BA590 /* SLDeparture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F76E231EB244B1005BA590 /* SLDeparture.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		397903851EAA2684009D0FE0 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGeofenceController.swift; sourceTree = "<group>"; };
 		39E69D791EB366B1002949C2 /* MapCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCircle.swift; sourceTree = "<group>"; };
+		39E69D7E1EB38EAD002949C2 /* Geofence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geofence.swift; sourceTree = "<group>"; };
 		95F76E231EB244B1005BA590 /* SLDeparture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLDeparture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				95F76E231EB244B1005BA590 /* SLDeparture.swift */,
+				39E69D7E1EB38EAD002949C2 /* Geofence.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				39E69D7A1EB366B1002949C2 /* MapCircle.swift in Sources */,
 				3979035D1EAA06C0009D0FE0 /* geoman.xcdatamodeld in Sources */,
 				95F76E241EB244B1005BA590 /* SLDeparture.swift in Sources */,
+				39E69D7F1EB38EAD002949C2 /* Geofence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -48,8 +48,9 @@ class CreateGeofenceController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 	
-	func drawCircleOnMap(center: CLLocationCoordinate2D, radius: CLLocationDistance) {
-		let mapCircle = MapCircle(center: center, radius: radius)
+	func drawGeofenceOnMap(geofence: Geofence) {
+		// Geofences are circles
+		let mapCircle = MapCircle(center: geofence.center, radius: geofence.radius)
 		mapCircle.color = UIColor.blue
 		mapView.add(mapCircle)
 	}
@@ -99,10 +100,12 @@ class CreateGeofenceController: UIViewController {
 	
 	func createGeofence(center: CLLocationCoordinate2D) {
 		// TODO Get radius from user
-		// TODO Save geofence to persistent storage (and actually create a geofence object)
+		// TODO Make it an actual geofence
+		// TODO Save geofence to persistent storage
 		let radius: CLLocationDistance = 1000;
 		print("Creating geofence at \(center) with radius \(radius)")
-		drawCircleOnMap(center: center, radius: radius)
+		let geofence = Geofence(center: center, radius: radius)
+		drawGeofenceOnMap(geofence: geofence)
 	}
 	
 }
