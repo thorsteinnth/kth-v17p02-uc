@@ -112,7 +112,7 @@
 				397903601EAA06C0009D0FE0 /* LaunchScreen.storyboard */,
 				397903631EAA06C0009D0FE0 /* Info.plist */,
 				3979035B1EAA06C0009D0FE0 /* geoman.xcdatamodeld */,
-				39E69D791EB366B1002949C2 /* MapCircle.swift */,
+				39E69D7B1EB38D37002949C2 /* Map overlays */,
 				397903851EAA2684009D0FE0 /* MainController.swift */,
 				397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */,
 			);
@@ -135,6 +135,14 @@
 				397903791EAA06C0009D0FE0 /* Info.plist */,
 			);
 			path = geomanUITests;
+			sourceTree = "<group>";
+		};
+		39E69D7B1EB38D37002949C2 /* Map overlays */ = {
+			isa = PBXGroup;
+			children = (
+				39E69D791EB366B1002949C2 /* MapCircle.swift */,
+			);
+			name = "Map overlays";
 			sourceTree = "<group>";
 		};
 		95F76E221EB24472005BA590 /* Model */ = {
