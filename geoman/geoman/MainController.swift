@@ -34,9 +34,11 @@ class MainController: UIViewController {
         //getCalendarEvents()
         
         // Testing getting departures from Trafiklab - SL API
-        //getNextSLDepartures()
+        getNextSLDepartures()
         
         //showSimpleLocalNototification()
+        
+        let events = CalendarEventService.getNextCalendarEvents()
     }
     
     func getNextSLDepartures() {
@@ -48,7 +50,7 @@ class MainController: UIViewController {
         // Ropsten: 9220
         // Kista: 9302
         
-        SLDeparture.getDepartures(stationCode: "9302") { departures in
+        SLDepartureService.getSLDepartures(stationCode: "9302") { departures in
             
             if departures.count > 0 {
                 print("We got departures:")
@@ -60,42 +62,6 @@ class MainController: UIViewController {
                 print("Destination: " + departure.destination)
                 print("Time: " + departure.displayTime)
                 print("")
-            }
-        }
-    }
-    
-    func getCalendarEvents() {
-        
-        let eventStore = EKEventStore()
-        
-        let authorizationStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
-        
-        if authorizationStatus == EKAuthorizationStatus.authorized {
-            
-            let calendars = eventStore.calendars(for: EKEntityType.event)
-            
-            for calendar in calendars {
-                
-                if calendar.title == "KTH" {
-                    
-                    // Find events for the next 4 hours
-                    let startDate = Date(timeIntervalSinceNow: 0)
-                    let endDate = Date(timeIntervalSinceNow: 24*3600)
-                    
-                    let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
-                    
-                    let events = eventStore.events(matching: predicate)
-                    
-                    for event in events {
-                        
-                        print("Class: " + event.title)
-                        print("Room: " + event.location!)
-                        
-                        let time = DateFormatter.localizedString(from: event.startDate, dateStyle: DateFormatter.Style.short, timeStyle: DateFormatter.Style.short)
-                        
-                        print("Date and time: " + time)
-                    }
-                }
             }
         }
     }
