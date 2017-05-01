@@ -44,10 +44,10 @@
             </objects>
             <point key="canvasLocation" x="1076" y="138.98050974512745"/>
         </scene>
-        <!--Create fence-->
+        <!--Geoman-->
         <scene sceneID="W56-LM-3qd">
             <objects>
-                <viewController title="Create fence" id="6lG-Kd-ztR" customClass="CreateGeofenceController" customModule="geoman" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Geoman" id="6lG-Kd-ztR" customClass="MapViewController" customModule="geoman" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ld1-yo-gu2"/>
                         <viewControllerLayoutGuide type="bottom" id="1q1-xx-mxl"/>
@@ -70,16 +70,54 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="JIt-ks-tsv" id="4ln-U2-0HB"/>
+                        <segue destination="oZH-6v-aOv" kind="presentation" identifier="CreateGeofencePresentModallySegue" id="fEn-i1-agc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Mz-uQ-Daw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1956" y="138.98050974512745"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Create geofence-->
+        <scene sceneID="5Mu-rq-BMm">
+            <objects>
+                <viewController title="Create geofence" id="zwD-Au-aeA" customClass="CreateGeofenceController" customModule="geoman" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Txg-lq-sGN"/>
+                        <viewControllerLayoutGuide type="bottom" id="tBb-5b-EOs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CiV-tf-P2O">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxe-J0-heO">
+                                <rect key="frame" x="0.0" y="64" width="375" height="85"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="onBtnCreateGeofencePressed:" destination="zwD-Au-aeA" eventType="touchUpInside" id="gAi-dQ-7Pi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Yxe-J0-heO" secondAttribute="trailing" id="8Ov-D4-y41"/>
+                            <constraint firstItem="Yxe-J0-heO" firstAttribute="leading" secondItem="CiV-tf-P2O" secondAttribute="leading" id="VP9-ex-oTs"/>
+                            <constraint firstItem="Yxe-J0-heO" firstAttribute="top" secondItem="Txg-lq-sGN" secondAttribute="bottom" id="dhr-0x-mWz"/>
+                            <constraint firstItem="tBb-5b-EOs" firstAttribute="top" secondItem="Yxe-J0-heO" secondAttribute="bottom" constant="518" id="vXD-zL-31D"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Create geofence" id="R9k-aE-71o"/>
+                    <connections>
+                        <outlet property="btnCreateGeofence" destination="Yxe-J0-heO" id="wLi-CX-V5J"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pbh-eT-JK7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3704.8000000000002" y="142.57871064467767"/>
+        </scene>
+        <!--Main navigation controller-->
         <scene sceneID="dHw-dq-wx0">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mcx-C3-A4L" sceneMemberID="viewController">
+                <navigationController title="Main navigation controller" automaticallyAdjustsScrollViewInsets="NO" id="mcx-C3-A4L" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wfO-zE-kHQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -93,6 +131,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ens-GU-dFk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+        </scene>
+        <!--Create geofence navigation controller-->
+        <scene sceneID="84y-D3-zXI">
+            <objects>
+                <navigationController title="Create geofence navigation controller" automaticallyAdjustsScrollViewInsets="NO" id="oZH-6v-aOv" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="225-Ld-eqW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zwD-Au-aeA" kind="relationship" relationship="rootViewController" id="FCd-Fz-TaF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XtT-id-73H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2765.5999999999999" y="142.57871064467767"/>
         </scene>
     </scenes>
 </document>
