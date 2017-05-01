@@ -43,7 +43,6 @@ class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the ex
 		
 		let region = covertGeofenceToCircularRegion(geofence: geofence)
 		locationManager.startMonitoring(for: region)
-		print("Started monitoring geofence")
 	}
 	
 	func covertGeofenceToCircularRegion(geofence: Geofence) -> CLCircularRegion {
@@ -82,11 +81,19 @@ extension GeofenceService: CLLocationManagerDelegate {
 		// The latest location is at the end of the array
 		if let latestLocation = locations.last {
 			// The latest location is not nil
-			print("CLLocationManager.didUpdateLocations: \(latestLocation)")
+			//print("CLLocationManager.didUpdateLocations: \(latestLocation)")
 		}
 		else {
 			print("CLLocationManager.didUpdateLocations: nil")
 		}
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
+		print("CLLocationManager.didStartMonitoringForRegion: \(region)")
+	}
+	
+	func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
+		print("CLLocationManager.monitoringDidFailForRegion: \(region) with error: \(error)")
 	}
 }
 
