@@ -32,13 +32,13 @@ class MainController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         // Testing Calendar
-        //getCalendarAccess()
-        //getCalendarEvents()
+        getCalendarAccess()
+        getCalendarEvents()
         
         // Testing getting departures from Trafiklab - SL API
         //getNextSLDepartures()
         
-        showSimpleLocalNototification()
+        //showSimpleLocalNototification()
     }
     
     func getNextSLDepartures() {
@@ -92,11 +92,11 @@ class MainController: UIViewController {
             
             for calendar in calendars {
                 
-                print(calendar.title)
-                if calendar.title == "Calendar" {
+                if calendar.title == "KTH" {
                     
+                    // Find events for the next 4 hours
                     let startDate = Date(timeIntervalSinceNow: 0)
-                    let endDate = Date(timeIntervalSinceNow: 12*3600)
+                    let endDate = Date(timeIntervalSinceNow: 24*3600)
                     
                     let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
                     
@@ -104,7 +104,12 @@ class MainController: UIViewController {
                     
                     for event in events {
                         
-                        print("Event found: " + event.title)
+                        print("Class: " + event.title)
+                        print("Room: " + event.location!)
+                        
+                        let time = DateFormatter.localizedString(from: event.startDate, dateStyle: DateFormatter.Style.short, timeStyle: DateFormatter.Style.short)
+                        
+                        print("Date and time: " + time)
                     }
                 }
             }
