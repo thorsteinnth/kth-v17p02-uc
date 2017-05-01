@@ -8,6 +8,8 @@
 
 import UIKit
 import EventKit
+import UserNotifications
+import UserNotificationsUI
 
 class MainController: UIViewController {
 	
@@ -30,11 +32,13 @@ class MainController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         // Testing Calendar
-        getCalendarAccess()
-        getCalendarEvents()
+        //getCalendarAccess()
+        //getCalendarEvents()
         
         // Testing getting departures from Trafiklab - SL API
-        getNextSLDepartures()
+        //getNextSLDepartures()
+        
+        showSimpleLocalNototification()
     }
     
     func getNextSLDepartures() {
@@ -88,7 +92,6 @@ class MainController: UIViewController {
             
             for calendar in calendars {
                 
-                // TODO : We could have a setting screen where the user selects which calender he want's to get notifications for
                 print(calendar.title)
                 if calendar.title == "Calendar" {
                     
@@ -105,6 +108,52 @@ class MainController: UIViewController {
                     }
                 }
             }
+        }
+    }
+    
+    //TEST Code for Local Notification
+    
+    func showSimpleLocalNototification() {
+        
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.title = "Test Notifications"
+        notificationContent.subtitle = "Some subtitle"
+        notificationContent.body = "Test local notification"
+        notificationContent.sound = UNNotificationSound.default()
+        
+        //trigger after 10 sec
+        let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: 10.0, repeats: false)
+        let req = UNNotificationRequest(identifier: "someId", content: notificationContent, trigger: trigger)
+        
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().add(req){(error) in
+            
+            if (error != nil){
+                
+                print("error")
+            }
+        }
+        
+    }
+}
+
+extension MainController : UNUserNotificationCenterDelegate{
+    
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        print("Tapped in notification")
+    }
+    
+    //This is key callback to present notification while the app is in foreground
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        print("Notification being triggered")
+        
+        if notification.request.identifier == "someId"{
+            
+            completionHandler( [.alert,.sound,.badge])
+            
         }
     }
 }
