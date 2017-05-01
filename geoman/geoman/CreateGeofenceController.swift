@@ -13,7 +13,7 @@ import CoreLocation
 class CreateGeofenceController: UIViewController {
 	
 	@IBOutlet weak var mapView: MKMapView!
-	let geofenceService = GeofenceService()
+	let geofenceService = (UIApplication.shared.delegate as! AppDelegate).geofenceService
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
