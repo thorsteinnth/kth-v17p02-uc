@@ -62,13 +62,19 @@ class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the ex
 		let notificationService = (UIApplication.shared.delegate as! AppDelegate).notificationService
 		
 		var body = ""
-		switch (geofence.type) {
-		case Geofence.GeofenceType.calendar:
-			body = "Should show calendar event"
-		case Geofence.GeofenceType.custom:
-			body = geofence.customNotification
-		case Geofence.GeofenceType.metro:
-			body = "Should show metro information"
+		switch (geofence) {
+		case is CalendarEventGeofence:
+			let calendarEventGeofence = geofence as! CalendarEventGeofence
+			body = "Should show calendar event from calendar with ID: \(calendarEventGeofence.calendarId)"
+		case is CustomGeofence:
+			let customGeofence = geofence as! CustomGeofence
+			body = customGeofence.customNotification
+		case is MetroGeofence:
+			let metroGeofence = geofence as! MetroGeofence
+			body = "Should show metro information for station with ID: \(metroGeofence.stationId)"
+		default:
+			print("GeofenceService.displayNotificationForGeofence - Unknown geofence type: \(type(of: geofence))")
+			body = ""
 		}
 		
 		notificationService.showLocalNotification(
