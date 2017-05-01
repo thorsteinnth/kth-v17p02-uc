@@ -102,6 +102,8 @@ extension GeofenceService: CLLocationManagerDelegate {
 	
 	func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
 		print("CLLocationManager.didEnterRegion: \(region)")
+		let notificationService = (UIApplication.shared.delegate as! AppDelegate).notificationService
+		notificationService.showLocalNotification()
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {

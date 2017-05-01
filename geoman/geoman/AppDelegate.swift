@@ -14,8 +14,11 @@ import UserNotifications
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+	// TODO Move location permission request here, from GeofenceService
+	
 	var window: UIWindow?
 	let geofenceService = GeofenceService()
+	let notificationService = NotificationService()
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
