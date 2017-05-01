@@ -93,7 +93,19 @@ extension GeofenceService: CLLocationManagerDelegate {
 	}
 	
 	func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
-		print("CLLocationManager.monitoringDidFailForRegion: \(region) with error: \(error)")
+		print("CLLocationManager.monitoringDidFailForRegion: \(String(describing: region)) with error: \(error)")
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+		print("CLLocationManager.didFailWithError: \(error)")
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+		print("CLLocationManager.didEnterRegion: \(region)")
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+		print("CLLocationManager.didExitRegion: \(region)")
 	}
 }
 
