@@ -4,7 +4,7 @@ import EventKit
 
 class CalendarEventService {
     
-    static func getNextCalendarEvents() -> [CalendarEvent] {
+    static func getNextCalendarEvents(calendarEventId: String) -> [CalendarEvent] {
         
         var calendarEvents: [CalendarEvent] = []
         
@@ -18,7 +18,7 @@ class CalendarEventService {
             
             for calendar in calendars {
                 
-                if calendar.title == "KTH" {
+                if calendar.title == calendarEventId {
                     
                     // Find events for the next 4 hours
                     let startDate = Date(timeIntervalSinceNow: 0)

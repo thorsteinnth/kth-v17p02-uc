@@ -34,11 +34,9 @@ class MainController: UIViewController {
         //getCalendarEvents()
         
         // Testing getting departures from Trafiklab - SL API
-        getNextSLDepartures()
+        //getNextSLDepartures()
         
         //showSimpleLocalNototification()
-        
-        let events = CalendarEventService.getNextCalendarEvents()
     }
     
     func getNextSLDepartures() {
