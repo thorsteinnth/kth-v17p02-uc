@@ -44,10 +44,10 @@
             </objects>
             <point key="canvasLocation" x="1076" y="138.98050974512745"/>
         </scene>
-        <!--Create fence-->
+        <!--Geoman-->
         <scene sceneID="W56-LM-3qd">
             <objects>
-                <viewController title="Create fence" id="6lG-Kd-ztR" customClass="CreateGeofenceController" customModule="geoman" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Geoman" id="6lG-Kd-ztR" customClass="MapViewController" customModule="geoman" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ld1-yo-gu2"/>
                         <viewControllerLayoutGuide type="bottom" id="1q1-xx-mxl"/>

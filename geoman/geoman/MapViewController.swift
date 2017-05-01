@@ -1,5 +1,5 @@
 //
-//  CreateGeofenceController.swift
+//  MapViewController.swift
 //  geoman
 //
 //  Created by Þorsteinn Þorri Sigurðsson on 21/04/2017.
@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class CreateGeofenceController: UIViewController {
+class MapViewController: UIViewController {
 	
 	@IBOutlet weak var mapView: MKMapView!
 	let geofenceService = (UIApplication.shared.delegate as! AppDelegate).geofenceService
@@ -101,7 +101,7 @@ class CreateGeofenceController: UIViewController {
 	
 }
 
-extension CreateGeofenceController: MKMapViewDelegate {
+extension MapViewController: MKMapViewDelegate {
 	
 	// We use the mapview delegate to update the map
 	// It only updates the user's location when he moves, not continuously

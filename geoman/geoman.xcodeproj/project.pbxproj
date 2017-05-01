@@ -20,7 +20,7 @@
 		3979036D1EAA06C0009D0FE0 /* geomanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3979036C1EAA06C0009D0FE0 /* geomanTests.swift */; };
 		397903781EAA06C0009D0FE0 /* geomanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903771EAA06C0009D0FE0 /* geomanUITests.swift */; };
 		397903861EAA2684009D0FE0 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903851EAA2684009D0FE0 /* MainController.swift */; };
-		397903881EAA27FE009D0FE0 /* CreateGeofenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */; };
+		397903881EAA27FE009D0FE0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903871EAA27FE009D0FE0 /* MapViewController.swift */; };
 		39E69D7A1EB366B1002949C2 /* MapCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E69D791EB366B1002949C2 /* MapCircle.swift */; };
 		39E69D7F1EB38EAD002949C2 /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E69D7E1EB38EAD002949C2 /* Geofence.swift */; };
 		95329DE71EB7613000E72E2F /* CalendarEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95329DE61EB7613000E72E2F /* CalendarEventService.swift */; };
@@ -66,7 +66,7 @@
 		397903771EAA06C0009D0FE0 /* geomanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = geomanUITests.swift; sourceTree = "<group>"; };
 		397903791EAA06C0009D0FE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		397903851EAA2684009D0FE0 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
-		397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGeofenceController.swift; sourceTree = "<group>"; };
+		397903871EAA27FE009D0FE0 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		39E69D791EB366B1002949C2 /* MapCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCircle.swift; sourceTree = "<group>"; };
 		39E69D7E1EB38EAD002949C2 /* Geofence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geofence.swift; sourceTree = "<group>"; };
 		95329DE61EB7613000E72E2F /* CalendarEventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventService.swift; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				397903851EAA2684009D0FE0 /* MainController.swift */,
-				397903871EAA27FE009D0FE0 /* CreateGeofenceController.swift */,
+				397903871EAA27FE009D0FE0 /* MapViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -333,7 +333,7 @@
 			files = (
 				95329DE91EB7625300E72E2F /* CalendarEvent.swift in Sources */,
 				395A8CA21EB7750900A91DF7 /* MetroGeofence.swift in Sources */,
-				397903881EAA27FE009D0FE0 /* CreateGeofenceController.swift in Sources */,
+				397903881EAA27FE009D0FE0 /* MapViewController.swift in Sources */,
 				397903861EAA2684009D0FE0 /* MainController.swift in Sources */,
 				397903551EAA06C0009D0FE0 /* AppDelegate.swift in Sources */,
 				39E69D7A1EB366B1002949C2 /* MapCircle.swift in Sources */,
