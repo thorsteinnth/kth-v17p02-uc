@@ -10,13 +10,15 @@ import UIKit
 import EventKit
 import CoreData
 import UserNotifications
-import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+	// TODO Move location permission request here, from GeofenceService
+	
 	var window: UIWindow?
-	let locationManager = CLLocationManager()
+	let geofenceService = GeofenceService()
+	let notificationService = NotificationService()
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
@@ -30,14 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 		
-		// Location manager setup
-		self.locationManager.requestAlwaysAuthorization()
-		if (CLLocationManager.locationServicesEnabled()) {
-			locationManager.delegate = self
-			locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-			locationManager.startUpdatingLocation()
-		}
-        
         // Calendar access
         let eventStore = EKEventStore()
         eventStore.requestAccess(to: EKEntityType.event, completion: {
@@ -47,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("No access to calendar..")
             }
         })
-        
+		
 		return true
 	}
 
@@ -121,39 +115,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 
 }
-
-extension AppDelegate: CLLocationManagerDelegate {
-	
-	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-		// The authorization state for the application changed
-		var locationStatus = String()
-		switch status {
-		case CLAuthorizationStatus.restricted:
-			locationStatus = "Restricted"
-		case CLAuthorizationStatus.denied:
-			locationStatus = "Denied"
-		case CLAuthorizationStatus.notDetermined:
-			locationStatus = "Not determined"
-		case CLAuthorizationStatus.authorizedAlways:
-			locationStatus = "Authorized always"
-		case CLAuthorizationStatus.authorizedWhenInUse:
-			locationStatus = "Authorized when in use"
-		default:
-			locationStatus = "Unknown location authorization status"
-		}
-		print("CLLocationManager.didChangeAuthorization: \(locationStatus)")
-	}
-	
-	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		// The latest location is at the end of the array
-		if let latestLocation = locations.last {
-			// The latest location is not nil
-			//print("CLLocationManager.didUpdateLocations: \(latestLocation)")
-		}
-		else {
-			print("CLLocationManager.didUpdateLocations: nil")
-		}
-	}
-}
-
 
