@@ -14,7 +14,7 @@ import UserNotifications
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-	// TODO Move location permission request here, from GeofenceService
+	// TODO Move location permission request here, from GeofenceService?
 	
 	var window: UIWindow?
 	let geofenceService = GeofenceService()

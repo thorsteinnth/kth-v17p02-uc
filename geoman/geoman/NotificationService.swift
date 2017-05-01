@@ -14,16 +14,15 @@ class NotificationService: NSObject {
 	
 	// TODO Show proper notifications
 	
-	func showLocalNotification() {
+	func showLocalNotification(title: String, subTitle: String, body: String) {
 		
 		let notificationContent = UNMutableNotificationContent()
-		notificationContent.title = "Test Notifications"
-		notificationContent.subtitle = "Some subtitle"
-		notificationContent.body = "Test local notification"
+		notificationContent.title = title
+		notificationContent.subtitle = subTitle
+		notificationContent.body = body
 		notificationContent.sound = UNNotificationSound.default()
 		
-		// trigger after 10 sec
-		let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: 10.0, repeats: false)
+		let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: 1.0, repeats: false)
 		let req = UNNotificationRequest(identifier: "someId", content: notificationContent, trigger: trigger)
 		
 		UNUserNotificationCenter.current().delegate = self

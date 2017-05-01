@@ -13,6 +13,7 @@ import CoreLocation
 class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the extension to work
 
 	let locationManager = CLLocationManager()
+	var geofenceDict = [String: Geofence]()
 	
 	override init() {
 		super.init()
@@ -29,7 +30,6 @@ class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the ex
 		// Adapted from: https://www.raywenderlich.com/136165/core-location-geofencing-tutorial
 		
 		// TODO Throw custom exceptions
-		// TODO Save geofence to persistent storage
 		
 		// Check if geofencing supported on this device
 		if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
@@ -43,6 +43,10 @@ class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the ex
 		
 		let region = covertGeofenceToCircularRegion(geofence: geofence)
 		locationManager.startMonitoring(for: region)
+		
+		// Save geofence
+		// TODO Save to persistent storage
+		geofenceDict[geofence.sUUID] = geofence
 	}
 	
 	func covertGeofenceToCircularRegion(geofence: Geofence) -> CLCircularRegion {
@@ -52,7 +56,27 @@ class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the ex
 		region.notifyOnExit = false
 		return region
 	}
-
+	
+	func displayNotificationForGeofence(geofence: Geofence) {
+		
+		let notificationService = (UIApplication.shared.delegate as! AppDelegate).notificationService
+		
+		var body = ""
+		switch (geofence.type) {
+		case Geofence.GeofenceType.calendar:
+			body = "Should show calendar event"
+		case Geofence.GeofenceType.custom:
+			body = geofence.customNotification
+		case Geofence.GeofenceType.metro:
+			body = "Should show metro information"
+		}
+		
+		notificationService.showLocalNotification(
+			title: "Entered geofence",
+			subTitle: geofence.name,
+			body: body
+		)
+	}
 }
 
 extension GeofenceService: CLLocationManagerDelegate {
@@ -101,9 +125,16 @@ extension GeofenceService: CLLocationManagerDelegate {
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+		
 		print("CLLocationManager.didEnterRegion: \(region)")
-		let notificationService = (UIApplication.shared.delegate as! AppDelegate).notificationService
-		notificationService.showLocalNotification()
+		
+		if let geofence = geofenceDict[region.identifier] {
+			print("CLLocationManager.didEnterRegion: Just entered geofence: \(geofence)")
+			displayNotificationForGeofence(geofence: geofence)
+		}
+		else {
+			print("CLLocationManager.didEnterRegion: Could not find geofence for region: \(region)")
+		}
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {

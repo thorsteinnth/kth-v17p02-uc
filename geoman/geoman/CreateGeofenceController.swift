@@ -90,10 +90,12 @@ class CreateGeofenceController: UIViewController {
 	}
 	
 	func createGeofence(center: CLLocationCoordinate2D) {
-		// TODO Get radius from user		
+		// TODO Get radius from user
+		// TODO Create geofence of the correct type
 		let radius: CLLocationDistance = 1000;
 		print("Creating geofence at \(center) with radius \(radius)")
-		let geofence = Geofence(center: center, radius: radius)
+		let geofence = Geofence(type: Geofence.GeofenceType.custom, name: "test geofence", center: center, radius: radius)
+		geofence.customNotification = "This is a test custom notification :)"
 		geofenceService.addGeofence(geofence: geofence)
 		drawGeofenceOnMap(geofence: geofence)
 	}

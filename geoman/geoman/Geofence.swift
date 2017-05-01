@@ -8,15 +8,33 @@
 
 import CoreLocation
 
-class Geofence
+class Geofence : CustomStringConvertible
 {
-	var sUUID: String
+	enum GeofenceType: String {
+		case metro, calendar, custom
+	}
+	
+	let sUUID: String
+	let type: GeofenceType
+	var name: String
 	var center: CLLocationCoordinate2D
 	var radius: CLLocationDistance
+	var customNotification: String
 	
-	init(center: CLLocationCoordinate2D, radius: CLLocationDistance) {
+	init(type: GeofenceType, name: String, center: CLLocationCoordinate2D, radius: CLLocationDistance) {
 		self.sUUID = UUID().uuidString
+		self.type = type
+		self.name = name
 		self.center = center
 		self.radius = radius
+		self.customNotification = ""
+	}
+	
+	public var description: String {
+		return "Geofence: type: \(type) - sUUID: \(sUUID) - name: \(name) - center: \(center) - radius: \(radius) - customNotification: \(customNotification)"
+	}
+	
+	public func setCustomNotificationText(text: String) {
+		self.customNotification = text
 	}
 }
