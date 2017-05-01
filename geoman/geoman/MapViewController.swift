@@ -15,6 +15,10 @@ class MapViewController: UIViewController {
 	@IBOutlet weak var mapView: MKMapView!
 	let geofenceService = (UIApplication.shared.delegate as! AppDelegate).geofenceService
 	
+	// Stores the coordinates of the geofence we are about to create
+	// Stored as an instance variable so we can use it in the prepareForSegue() method
+	var newGeofenceCenter: CLLocationCoordinate2D?
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -34,9 +38,25 @@ class MapViewController: UIViewController {
 		mapView.addGestureRecognizer(longpressRecognizer)
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		refreshGeofenceOverlays()
+	}
+	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
+	}
+	
+	func refreshGeofenceOverlays() {
+		// Remove all existing overlays from the map
+		let overlays = mapView.overlays
+		mapView.removeOverlays(overlays)
+		// Redraw all existing geofences
+		let geofences = geofenceService.getAllGeofences()
+		for geofence in geofences {
+			drawGeofenceOnMap(geofence: geofence)
+		}
 	}
 	
 	func drawGeofenceOnMap(geofence: Geofence) {
@@ -90,16 +110,16 @@ class MapViewController: UIViewController {
 	}
 	
 	func createGeofence(center: CLLocationCoordinate2D) {
+		newGeofenceCenter = center
 		self.performSegue(withIdentifier: "CreateGeofencePresentModallySegue", sender:self)
-		return
-		
-		// TODO Get radius from user
-		// TODO Create geofence of the correct type
-		let radius: CLLocationDistance = 1000;
-		print("Creating geofence at \(center) with radius \(radius)")
-		let geofence = CalendarEventGeofence(name: "test geofence", center: center, radius: radius, calendarId: "KTH")
-		geofenceService.addGeofence(geofence: geofence)
-		drawGeofenceOnMap(geofence: geofence)
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if let destinationViewController = segue.destination as? UINavigationController {
+			if let createGeofenceController = destinationViewController.topViewController as? CreateGeofenceController {
+				createGeofenceController.center = newGeofenceCenter
+			}
+		}
 	}
 	
 }

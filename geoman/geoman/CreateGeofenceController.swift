@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import CoreLocation
 
 class CreateGeofenceController : UIViewController {
 
 	@IBOutlet weak var btnCreateGeofence: UIButton!
+	
+	let geofenceService = (UIApplication.shared.delegate as! AppDelegate).geofenceService
+	var center: CLLocationCoordinate2D?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -32,7 +36,19 @@ class CreateGeofenceController : UIViewController {
 	}
 	
 	@IBAction func onBtnCreateGeofencePressed(_ sender: Any) {
-		print("Should create geofence")
+		// TODO Get radius from user
+		// TODO Create geofence of the correct type
+		if let center = center {
+			let radius: CLLocationDistance = 1000;
+			print("Creating geofence at \(center) with radius \(radius)")
+			let geofence = CalendarEventGeofence(name: "test geofence", center: center, radius: radius, calendarId: "KTH")
+			geofenceService.addGeofence(geofence: geofence)
+			
+			// Dismiss controller and go back
+			self.dismiss(animated: true, completion: {});
+		}
+		else {
+			print("CreateGeofenceController.onBtnCreateGeofencePressed: ERROR - Do not have a center value")
+		}
 	}
-	
 }

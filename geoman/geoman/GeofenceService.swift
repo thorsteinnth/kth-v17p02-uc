@@ -49,6 +49,11 @@ class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the ex
 		geofenceDict[geofence.sUUID] = geofence
 	}
 	
+	func getAllGeofences() -> Array<Geofence> {
+		let geofences = [Geofence](geofenceDict.values)
+		return geofences
+	}
+	
 	func covertGeofenceToCircularRegion(geofence: Geofence) -> CLCircularRegion {
 		let region = CLCircularRegion(center: geofence.center, radius: geofence.radius, identifier: geofence.sUUID)
 		// TODO Allow user to set notify rules
