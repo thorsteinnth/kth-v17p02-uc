@@ -10,9 +10,20 @@ import Foundation
 import UIKit
 import CoreLocation
 
-class GeofenceService {
+class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the extension to work
 
-	// TODO Move LocationManager in here
+	let locationManager = CLLocationManager()
+	
+	override init() {
+		super.init()
+		// Location manager setup
+		self.locationManager.requestAlwaysAuthorization()
+		if (CLLocationManager.locationServicesEnabled()) {
+			locationManager.delegate = self
+			locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+			locationManager.startUpdatingLocation()
+		}
+	}
 	
 	func addGeofence(geofence: Geofence) {
 		// Adapted from: https://www.raywenderlich.com/136165/core-location-geofencing-tutorial
@@ -31,7 +42,7 @@ class GeofenceService {
 		}
 		
 		let region = covertGeofenceToCircularRegion(geofence: geofence)
-		(UIApplication.shared.delegate as! AppDelegate).locationManager.startMonitoring(for: region)
+		locationManager.startMonitoring(for: region)
 		print("Started monitoring geofence")
 	}
 	
@@ -44,3 +55,38 @@ class GeofenceService {
 	}
 
 }
+
+extension GeofenceService: CLLocationManagerDelegate {
+	
+	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+		// The authorization state for the application changed
+		var locationStatus = String()
+		switch status {
+		case CLAuthorizationStatus.restricted:
+			locationStatus = "Restricted"
+		case CLAuthorizationStatus.denied:
+			locationStatus = "Denied"
+		case CLAuthorizationStatus.notDetermined:
+			locationStatus = "Not determined"
+		case CLAuthorizationStatus.authorizedAlways:
+			locationStatus = "Authorized always"
+		case CLAuthorizationStatus.authorizedWhenInUse:
+			locationStatus = "Authorized when in use"
+		default:
+			locationStatus = "Unknown location authorization status"
+		}
+		print("CLLocationManager.didChangeAuthorization: \(locationStatus)")
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		// The latest location is at the end of the array
+		if let latestLocation = locations.last {
+			// The latest location is not nil
+			print("CLLocationManager.didUpdateLocations: \(latestLocation)")
+		}
+		else {
+			print("CLLocationManager.didUpdateLocations: nil")
+		}
+	}
+}
+
