@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EventKit
 import CoreData
 import UserNotifications
 import CoreLocation
@@ -36,6 +37,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
 			locationManager.startUpdatingLocation()
 		}
+        
+        // Calendar access
+        let eventStore = EKEventStore()
+        eventStore.requestAccess(to: EKEntityType.event, completion: {
+            (accessGranted: Bool, error: Error?) in
+            
+            if !accessGranted {
+                print("No access to calendar..")
+            }
+        })
         
 		return true
 	}

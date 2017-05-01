@@ -32,8 +32,7 @@ class MainController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         // Testing Calendar
-        getCalendarAccess()
-        getCalendarEvents()
+        //getCalendarEvents()
         
         // Testing getting departures from Trafiklab - SL API
         //getNextSLDepartures()
@@ -64,20 +63,6 @@ class MainController: UIViewController {
                 print("")
             }
         }
-    }
-    
-    func getCalendarAccess(){
-        
-        let eventStore = EKEventStore()
-        eventStore.requestAccess(to: EKEntityType.event, completion: {
-            (accessGranted: Bool, error: Error?) in
-            
-            if !accessGranted {
-                let alertController = UIAlertController(title: "Warning", message: "You need to allow access to the calendar in order to receive event notifications.", preferredStyle: .alert);
-                
-                self.present(alertController, animated: true){}
-            }
-        })
     }
     
     func getCalendarEvents() {
