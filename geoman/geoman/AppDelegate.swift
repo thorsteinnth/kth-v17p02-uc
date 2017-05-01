@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EventKit
 import CoreData
 import UserNotifications
 
@@ -27,6 +28,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Notifications disabled..")
             }
         }
+		
+        // Calendar access
+        let eventStore = EKEventStore()
+        eventStore.requestAccess(to: EKEntityType.event, completion: {
+            (accessGranted: Bool, error: Error?) in
+            
+            if !accessGranted {
+                print("No access to calendar..")
+            }
+        })
 		
 		return true
 	}
