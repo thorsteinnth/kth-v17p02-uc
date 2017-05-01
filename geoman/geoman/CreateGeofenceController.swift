@@ -13,19 +13,10 @@ import CoreLocation
 class CreateGeofenceController: UIViewController {
 	
 	@IBOutlet weak var mapView: MKMapView!
-	// TODO Move location manager to AppDelegate or special class/service
-	let locationManager = CLLocationManager()
+	let geofenceService = GeofenceService()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		// Location manager setup
-		self.locationManager.requestAlwaysAuthorization()
-		if (CLLocationManager.locationServicesEnabled()) {
-			locationManager.delegate = self
-			locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-			locationManager.startUpdatingLocation()
-		}
 		
 		// Map view setup
 		mapView.delegate = self
@@ -99,49 +90,14 @@ class CreateGeofenceController: UIViewController {
 	}
 	
 	func createGeofence(center: CLLocationCoordinate2D) {
-		// TODO Get radius from user
-		// TODO Make it an actual geofence
-		// TODO Save geofence to persistent storage
+		// TODO Get radius from user		
 		let radius: CLLocationDistance = 1000;
 		print("Creating geofence at \(center) with radius \(radius)")
 		let geofence = Geofence(center: center, radius: radius)
+		geofenceService.addGeofence(geofence: geofence)
 		drawGeofenceOnMap(geofence: geofence)
 	}
 	
-}
-
-extension CreateGeofenceController: CLLocationManagerDelegate {
-	
-	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-		// The authorization state for the application changed
-		var locationStatus = String()
-		switch status {
-		case CLAuthorizationStatus.restricted:
-			locationStatus = "Restricted"
-		case CLAuthorizationStatus.denied:
-			locationStatus = "Denied"
-		case CLAuthorizationStatus.notDetermined:
-			locationStatus = "Not determined"
-		case CLAuthorizationStatus.authorizedAlways:
-			locationStatus = "Authorized always"
-		case CLAuthorizationStatus.authorizedWhenInUse:
-			locationStatus = "Authorized when in use"
-		default:
-			locationStatus = "Unknown location authorization status"
-		}
-		print("CLLocationManager.didChangeAuthorization: \(locationStatus)")
-	}
-	
-	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		// The latest location is at the end of the array
-		if let latestLocation = locations.last {
-			// The latest location is not nil
-			//print("CLLocationManager.didUpdateLocations: \(latestLocation)")
-		}
-		else {
-			print("CLLocationManager.didUpdateLocations: nil")
-		}
-	}
 }
 
 extension CreateGeofenceController: MKMapViewDelegate {

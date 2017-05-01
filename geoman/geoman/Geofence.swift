@@ -10,12 +10,12 @@ import CoreLocation
 
 class Geofence
 {
-	// TODO Unique names? IDs?
-	
+	var sUUID: String
 	var center: CLLocationCoordinate2D
 	var radius: CLLocationDistance
 	
 	init(center: CLLocationCoordinate2D, radius: CLLocationDistance) {
+		self.sUUID = UUID().uuidString
 		self.center = center
 		self.radius = radius
 	}

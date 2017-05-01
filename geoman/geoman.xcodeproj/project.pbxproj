@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		395A8C981EB746C100A91DF7 /* GeofenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395A8C971EB746C100A91DF7 /* GeofenceService.swift */; };
 		397903551EAA06C0009D0FE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903541EAA06C0009D0FE0 /* AppDelegate.swift */; };
 		3979035A1EAA06C0009D0FE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 397903581EAA06C0009D0FE0 /* Main.storyboard */; };
 		3979035D1EAA06C0009D0FE0 /* geoman.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3979035B1EAA06C0009D0FE0 /* geoman.xcdatamodeld */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		395A8C971EB746C100A91DF7 /* GeofenceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeofenceService.swift; sourceTree = "<group>"; };
 		397903511EAA06C0009D0FE0 /* geoman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = geoman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		397903541EAA06C0009D0FE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		397903591EAA06C0009D0FE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			children = (
 				95F76E231EB244B1005BA590 /* SLDeparture.swift */,
 				39E69D7E1EB38EAD002949C2 /* Geofence.swift */,
+				395A8C971EB746C100A91DF7 /* GeofenceService.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				397903551EAA06C0009D0FE0 /* AppDelegate.swift in Sources */,
 				39E69D7A1EB366B1002949C2 /* MapCircle.swift in Sources */,
 				3979035D1EAA06C0009D0FE0 /* geoman.xcdatamodeld in Sources */,
+				395A8C981EB746C100A91DF7 /* GeofenceService.swift in Sources */,
 				95F76E241EB244B1005BA590 /* SLDeparture.swift in Sources */,
 				39E69D7F1EB38EAD002949C2 /* Geofence.swift in Sources */,
 			);
