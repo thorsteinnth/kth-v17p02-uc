@@ -12,6 +12,7 @@
 		395A8C9E1EB772C300A91DF7 /* CustomGeofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395A8C9D1EB772C300A91DF7 /* CustomGeofence.swift */; };
 		395A8CA21EB7750900A91DF7 /* MetroGeofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395A8CA11EB7750900A91DF7 /* MetroGeofence.swift */; };
 		395A8CA41EB7761C00A91DF7 /* CalendarEventGeofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395A8CA31EB7761C00A91DF7 /* CalendarEventGeofence.swift */; };
+		395A8CA61EB7827F00A91DF7 /* CreateGeofenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395A8CA51EB7827F00A91DF7 /* CreateGeofenceController.swift */; };
 		397903551EAA06C0009D0FE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903541EAA06C0009D0FE0 /* AppDelegate.swift */; };
 		3979035A1EAA06C0009D0FE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 397903581EAA06C0009D0FE0 /* Main.storyboard */; };
 		3979035D1EAA06C0009D0FE0 /* geoman.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3979035B1EAA06C0009D0FE0 /* geoman.xcdatamodeld */; };
@@ -52,6 +53,7 @@
 		395A8C9D1EB772C300A91DF7 /* CustomGeofence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGeofence.swift; sourceTree = "<group>"; };
 		395A8CA11EB7750900A91DF7 /* MetroGeofence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetroGeofence.swift; sourceTree = "<group>"; };
 		395A8CA31EB7761C00A91DF7 /* CalendarEventGeofence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventGeofence.swift; sourceTree = "<group>"; };
+		395A8CA51EB7827F00A91DF7 /* CreateGeofenceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGeofenceController.swift; sourceTree = "<group>"; };
 		397903511EAA06C0009D0FE0 /* geoman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = geoman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		397903541EAA06C0009D0FE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		397903591EAA06C0009D0FE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				397903851EAA2684009D0FE0 /* MainController.swift */,
 				397903871EAA27FE009D0FE0 /* MapViewController.swift */,
+				395A8CA51EB7827F00A91DF7 /* CreateGeofenceController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				395A8C9A1EB75E9600A91DF7 /* NotificationService.swift in Sources */,
 				3979035D1EAA06C0009D0FE0 /* geoman.xcdatamodeld in Sources */,
 				395A8C981EB746C100A91DF7 /* GeofenceService.swift in Sources */,
+				395A8CA61EB7827F00A91DF7 /* CreateGeofenceController.swift in Sources */,
 				95F76E241EB244B1005BA590 /* SLDeparture.swift in Sources */,
 				39E69D7F1EB38EAD002949C2 /* Geofence.swift in Sources */,
 			);

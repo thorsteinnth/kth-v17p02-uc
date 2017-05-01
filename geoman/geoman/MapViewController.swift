@@ -90,6 +90,9 @@ class MapViewController: UIViewController {
 	}
 	
 	func createGeofence(center: CLLocationCoordinate2D) {
+		self.performSegue(withIdentifier: "CreateGeofencePresentModallySegue", sender:self)
+		return
+		
 		// TODO Get radius from user
 		// TODO Create geofence of the correct type
 		let radius: CLLocationDistance = 1000;
