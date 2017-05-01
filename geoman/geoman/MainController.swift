@@ -35,7 +35,7 @@ class MainController: UIViewController {
         //getCalendarEvents()
         
         // Testing getting departures from Trafiklab - SL API
-        //getNextSLDepartures()
+        getNextSLDepartures()
         
         //showSimpleLocalNototification()
         
@@ -51,7 +51,7 @@ class MainController: UIViewController {
         // Ropsten: 9220
         // Kista: 9302
         
-        SLDeparture.getDepartures(stationCode: "9302") { departures in
+        SLDepartureService.getSLDepartures(stationCode: "9302") { departures in
             
             if departures.count > 0 {
                 print("We got departures:")
