@@ -11,8 +11,6 @@ import CoreLocation
 
 class CreateGeofenceController : UIViewController {
 
-	@IBOutlet weak var btnCreateGeofence: UIButton!
-	
 	let geofenceService = (UIApplication.shared.delegate as! AppDelegate).geofenceService
 	var center: CLLocationCoordinate2D?
 	
@@ -28,14 +26,21 @@ class CreateGeofenceController : UIViewController {
 		)
 		self.navigationItem.setLeftBarButton(btnClose, animated: false)
 		
-		btnCreateGeofence.setTitle("Create geofence", for: UIControlState.normal)
+		// Create geofence button
+		let btnCreateGeofence = UIBarButtonItem(
+			title: "Create",
+			style: .plain,
+			target: self,
+			action: #selector(onCreateGeofenceBarButtonItemPressed(sender:))
+		)
+		self.navigationItem.setRightBarButton(btnCreateGeofence, animated: false)
 	}
 	
 	func onCloseBarButtonItemPressed(sender: Any) {
 		self.dismiss(animated: true, completion: {});
 	}
 	
-	@IBAction func onBtnCreateGeofencePressed(_ sender: Any) {
+	func onCreateGeofenceBarButtonItemPressed(sender: Any) {
 		// TODO Get radius from user
 		// TODO Create geofence of the correct type
 		if let center = center {

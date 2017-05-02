@@ -88,27 +88,9 @@
                     <view key="view" contentMode="scaleToFill" id="CiV-tf-P2O">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxe-J0-heO">
-                                <rect key="frame" x="0.0" y="64" width="375" height="85"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="onBtnCreateGeofencePressed:" destination="zwD-Au-aeA" eventType="touchUpInside" id="gAi-dQ-7Pi"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Yxe-J0-heO" secondAttribute="trailing" id="8Ov-D4-y41"/>
-                            <constraint firstItem="Yxe-J0-heO" firstAttribute="leading" secondItem="CiV-tf-P2O" secondAttribute="leading" id="VP9-ex-oTs"/>
-                            <constraint firstItem="Yxe-J0-heO" firstAttribute="top" secondItem="Txg-lq-sGN" secondAttribute="bottom" id="dhr-0x-mWz"/>
-                            <constraint firstItem="tBb-5b-EOs" firstAttribute="top" secondItem="Yxe-J0-heO" secondAttribute="bottom" constant="518" id="vXD-zL-31D"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Create geofence" id="R9k-aE-71o"/>
-                    <connections>
-                        <outlet property="btnCreateGeofence" destination="Yxe-J0-heO" id="wLi-CX-V5J"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pbh-eT-JK7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
