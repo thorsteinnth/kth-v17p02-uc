@@ -13,8 +13,12 @@ import CoreLocation
 class CreateGeofenceController : UIViewController {
 
 	@IBOutlet weak var mapView: MKMapView!
+	@IBOutlet weak var lblRadius: UILabel!
+	@IBOutlet weak var sliderRadius: UISlider!
 	
 	let geofenceService = (UIApplication.shared.delegate as! AppDelegate).geofenceService
+	let initialRadius: CLLocationDistance = 500;
+	let sliderStep: Float = 100
 	var center: CLLocationCoordinate2D?
 	
 	override func viewDidLoad() {
@@ -49,6 +53,19 @@ class CreateGeofenceController : UIViewController {
 		} else {
 			print("CreateGeofenceController.viewDidLoad: ERROR - Do not have a center value")
 		}
+		
+		// Radius slider
+		sliderRadius.isContinuous = false
+		sliderRadius.maximumValue = 1000
+		sliderRadius.minimumValue = 100
+		sliderRadius.value = Float(initialRadius)
+		
+		// Radius label
+		lblRadius.text = getRadiusString(radius: sliderRadius.value)
+	}
+	
+	func getRadiusString(radius: Float) -> String {
+		return "Radius: \(radius) m"
 	}
 	
 	func onCloseBarButtonItemPressed(sender: Any) {
@@ -76,6 +93,12 @@ class CreateGeofenceController : UIViewController {
 		let regionRadius: CLLocationDistance = 1000
 		let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius * 2.0, regionRadius * 2.0)
 		mapView.setRegion(coordinateRegion, animated: true)
+	}
+	
+	@IBAction func onRadiusSliderValueChanged(_ sender: UISlider) {
+		// We want the slider to return values with preset increments
+		let roundedValue = round(sender.value / sliderStep) * sliderStep
+		lblRadius.text = getRadiusString(radius: roundedValue)
 	}
 }
 
