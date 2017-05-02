@@ -88,9 +88,23 @@
                     <view key="view" contentMode="scaleToFill" id="CiV-tf-P2O">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="V7G-2f-2Uu">
+                                <rect key="frame" x="0.0" y="65" width="375" height="160"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tBb-5b-EOs" firstAttribute="top" secondItem="V7G-2f-2Uu" secondAttribute="bottom" constant="443" id="N9y-M8-GWj"/>
+                            <constraint firstAttribute="trailing" secondItem="V7G-2f-2Uu" secondAttribute="trailing" id="PqK-SW-1ZU"/>
+                            <constraint firstItem="V7G-2f-2Uu" firstAttribute="leading" secondItem="CiV-tf-P2O" secondAttribute="leading" id="hlg-Rv-10G"/>
+                            <constraint firstItem="V7G-2f-2Uu" firstAttribute="top" secondItem="Txg-lq-sGN" secondAttribute="bottom" id="yGn-cS-YTV"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Create geofence" id="R9k-aE-71o"/>
+                    <connections>
+                        <outlet property="mapView" destination="V7G-2f-2Uu" id="aUI-oU-c6n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pbh-eT-JK7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
