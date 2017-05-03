@@ -54,18 +54,19 @@ class CreateGeofenceController : UIViewController {
 		}
 		
 		// Radius slider
-		sliderRadius.isContinuous = false
+		// Making this continuous, looks nicer, but mapview redraws are inefficient.
+		sliderRadius.isContinuous = true
 		sliderRadius.maximumValue = 1000
 		sliderRadius.minimumValue = 100
 		sliderRadius.value = Float(initialRadius)
 		
 		// Radius label
-		lblRadius.text = getRadiusString(radius: sliderRadius.value)
+		lblRadius.text = getRadiusString(radius: Int(sliderRadius.value))
 		
 		updateMapView()
 	}
 	
-	func getRadiusString(radius: Float) -> String {
+	func getRadiusString(radius: Int) -> String {
 		return "Radius: \(radius) m"
 	}
 	
@@ -74,10 +75,9 @@ class CreateGeofenceController : UIViewController {
 	}
 	
 	func onCreateGeofenceBarButtonItemPressed(sender: Any) {
-		// TODO Get radius from user
 		// TODO Create geofence of the correct type
 		if let center = center {
-			let radius: CLLocationDistance = 1000;
+			let radius: CLLocationDistance = CLLocationDistance(Int(sliderRadius.value));
 			print("Creating geofence at \(center) with radius \(radius)")
 			let geofence = CalendarEventGeofence(name: "test geofence", center: center, radius: radius, calendarId: "KTH")
 			geofenceService.addGeofence(geofence: geofence)
@@ -102,15 +102,16 @@ class CreateGeofenceController : UIViewController {
 	}
 	
 	@IBAction func onRadiusSliderValueChanged(_ sender: UISlider) {
-		// We want the slider to return values with preset increments
-		let roundedValue = round(sender.value / sliderStep) * sliderStep
-		lblRadius.text = getRadiusString(radius: roundedValue)
+		//let roundedValue = round(sender.value / sliderStep) * sliderStep
+		lblRadius.text = getRadiusString(radius: Int(sender.value))
 		updateMapView()
 	}
 	
 	// Geofence overlay
 	
 	func redrawGeofenceCircleOnMap(center: CLLocationCoordinate2D, radius: CLLocationDistance) {
+		// NOTE: This gets called very often since we are using a continuous slider.
+		// Probably very inefficient, but keeping it as is since it looks nicer.
 		// Remove current geofence circles, if any
 		let currentOverlays = mapView.overlays
 		mapView.removeOverlays(currentOverlays)
