@@ -13,7 +13,6 @@ import CoreLocation
 class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the extension to work
 
 	let locationManager = CLLocationManager()
-	var geofenceDict = [String: Geofence]()
 	
 	override init() {
 		super.init()
@@ -45,13 +44,30 @@ class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the ex
 		locationManager.startMonitoring(for: region)
 		
 		// Save geofence
-		// TODO Save to persistent storage
-		geofenceDict[geofence.sUUID] = geofence
+        if let data = UserDefaults.standard.object(forKey: "geofenceDict") as? NSData {
+            var geofenceDict = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as! [String: Geofence]
+            geofenceDict[geofence.sUUID] = geofence
+            let data = NSKeyedArchiver.archivedData(withRootObject: geofenceDict)
+            UserDefaults.standard.set(data, forKey: "geofenceDict")
+        }
+        else {
+            var geofenceDict = [String: Geofence]()
+            geofenceDict[geofence.sUUID] = geofence
+            let data = NSKeyedArchiver.archivedData(withRootObject: geofenceDict)
+            UserDefaults.standard.set(data, forKey: "geofenceDict")
+        }
 	}
 	
 	func getAllGeofences() -> Array<Geofence> {
-		let geofences = [Geofence](geofenceDict.values)
-		return geofences
+        
+        if let data = UserDefaults.standard.object(forKey: "geofenceDict") as? NSData {
+            let geofenceDict = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as! [String: Geofence]
+            let geofences = [Geofence](geofenceDict.values)
+            return geofences
+        }
+        else {
+            return []
+        }
 	}
 	
 	func covertGeofenceToCircularRegion(geofence: Geofence) -> CLCircularRegion {
@@ -250,14 +266,18 @@ extension GeofenceService: CLLocationManagerDelegate {
 	func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
 		
 		print("CLLocationManager.didEnterRegion: \(region)")
-		
-		if let geofence = geofenceDict[region.identifier] {
-			print("CLLocationManager.didEnterRegion: Just entered geofence: \(geofence)")
-			displayNotificationForGeofence(geofence: geofence)
-		}
-		else {
-			print("CLLocationManager.didEnterRegion: Could not find geofence for region: \(region)")
-		}
+        
+        if let data = UserDefaults.standard.object(forKey: "geofenceDict") as? NSData {
+            var geofenceDict = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as! [String: Geofence]
+            
+            if let geofence = geofenceDict[region.identifier] {
+                print("CLLocationManager.didEnterRegion: Just entered geofence: \(geofence)")
+                displayNotificationForGeofence(geofence: geofence)
+            }
+            else {
+                print("CLLocationManager.didEnterRegion: Could not find geofence for region: \(region)")
+            }
+        }
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {

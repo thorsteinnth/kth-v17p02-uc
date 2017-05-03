@@ -1,10 +1,3 @@
-//
-//  CustomGeofence.swift
-//  geoman
-//
-//  Created by Þorsteinn Þorri Sigurðsson on 01/05/2017.
-//  Copyright © 2017 ttsifannar. All rights reserved.
-//
 
 import CoreLocation
 
@@ -16,6 +9,17 @@ class CustomGeofence : Geofence {
 		self.customNotification = customNotification
 		super.init(name: name, center: center, radius: radius)
 	}
+    
+    // MARK: NSCoding
+    required init?(coder decoder: NSCoder) {
+        customNotification = decoder.decodeObject(forKey: "customNotification") as! String
+        super.init(coder: decoder)
+    }
+    
+    override func encode(with coder: NSCoder) {
+        coder.encode(self.customNotification, forKey: "customNotification")
+        super.encode(with: coder)
+    }
 	
 	public func setCustomNotificationText(text: String) {
 		self.customNotification = text

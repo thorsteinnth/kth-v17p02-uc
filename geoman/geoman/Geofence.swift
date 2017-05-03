@@ -1,14 +1,7 @@
-//
-//  Geofence.swift
-//  geoman
-//
-//  Created by Þorsteinn Þorri Sigurðsson on 28/04/2017.
-//  Copyright © 2017 ttsifannar. All rights reserved.
-//
 
 import CoreLocation
 
-class Geofence : CustomStringConvertible
+class Geofence : NSObject, NSCoding
 {
 	let sUUID: String
 	var name: String
@@ -22,7 +15,25 @@ class Geofence : CustomStringConvertible
 		self.radius = radius
 	}
 	
-	public var description: String {
+	public override var description: String {
 		return "Geofence: sUUID: \(sUUID) - name: \(name) - center: \(center) - radius: \(radius)"
 	}
+    
+    // MARK: NSCoding
+    required init?(coder decoder: NSCoder) {
+        sUUID = decoder.decodeObject(forKey: "suuid") as! String
+        name = decoder.decodeObject(forKey: "name") as! String
+        let latitude = decoder.decodeDouble(forKey: "latitude")
+        let longitude = decoder.decodeDouble(forKey: "longitude")
+        center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        radius = decoder.decodeDouble(forKey: "radius")
+    }
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(self.sUUID, forKey: "suuid")
+        coder.encode(self.name, forKey: "name")
+        coder.encode(self.center.latitude, forKey: "latitude")
+        coder.encode(self.center.longitude, forKey: "longitude")
+        coder.encode(self.radius, forKey: "radius")
+    }
 }
