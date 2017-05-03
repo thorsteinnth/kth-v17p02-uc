@@ -23,7 +23,7 @@ class NotificationService: NSObject {
 		notificationContent.sound = UNNotificationSound.default()
 		
 		let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: 1.0, repeats: false)
-		let req = UNNotificationRequest(identifier: "someId", content: notificationContent, trigger: trigger)
+		let req = UNNotificationRequest(identifier: UUID().uuidString, content: notificationContent, trigger: trigger)
 		
 		UNUserNotificationCenter.current().delegate = self
 		UNUserNotificationCenter.current().add(req){(error) in
@@ -44,9 +44,6 @@ extension NotificationService : UNUserNotificationCenterDelegate {
 	func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 		
 		print("Notification being triggered")
-		
-		if notification.request.identifier == "someId" {
-			completionHandler( [.alert,.sound,.badge])
-		}
+		completionHandler( [.alert,.sound,.badge])
 	}
 }
