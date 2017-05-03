@@ -157,7 +157,7 @@ class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the ex
     
     func displayMetroNotification(notificationService: NotificationService, geofenceName: String, stationId: String) {
         
-        let title = geofenceName
+        let title = "Geofence: \(geofenceName)"
         var subTitle = ""
         var body = ""
         
@@ -171,9 +171,9 @@ class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the ex
                         subTitle += "Station: \(departure.station)"
                     }
                     
-                    body += "Destination: \(departure.destination) "
-                    body += "Time: \(departure.displayTime) "
-                    body += ""
+                    body += departure.destination
+                    body += " - \(departure.displayTime) "
+                    body += "\n"
                 }
                 
                 notificationService.showLocalNotification(
