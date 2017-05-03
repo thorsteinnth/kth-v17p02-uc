@@ -187,7 +187,7 @@ class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the ex
     
     func displayCalendarEventNotification(notificationService: NotificationService, geofenceName: String, calendarId: String) {
         
-        let title = geofenceName
+        let title = "Geofence: \(geofenceName)"
         var subTitle = ""
         var body = ""
         
@@ -201,10 +201,10 @@ class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the ex
                     subTitle += "Calendar: \(calendarId)"
                 }
                 
-                body += "Title: \(event.title)"
-                body += "Location: \(event.location)"
-                body += "Time: \(event.dateTime)"
-                body += ""
+                body += "Title: \(event.title)\n"
+                body += "Location: \(event.location)\n"
+                body += "Time: \(event.dateTime)\n"
+                body += "\n"
             }
             
             notificationService.showLocalNotification(
