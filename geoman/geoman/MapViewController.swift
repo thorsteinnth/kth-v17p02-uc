@@ -130,8 +130,9 @@ extension MapViewController: MKMapViewDelegate {
 	// We could do it with the CLLocationManager, but the MKMapViewDelegate is easier
 	
 	func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+		// TODO Only zoom when we get location for the first time
 		//print("MKMapViewDelegate - user location updated: \(userLocation)")
-		mapView.setCenter(userLocation.coordinate, animated: true)
+		//mapView.setCenter(userLocation.coordinate, animated: true)
 	}
 	
 }
