@@ -12,14 +12,26 @@ import CoreLocation
 
 class CreateGeofenceController : UIViewController {
 
+	// TODO Need to add scrolling to this controller
+	// Scroll so that text view is visible when keyboard opens
+	// Also need it for landscape
+	
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var lblRadius: UILabel!
 	@IBOutlet weak var sliderRadius: UISlider!
+	@IBOutlet weak var segctrlGeofenceType: UISegmentedControl!
+	@IBOutlet weak var lblGeofenceTypeInstructions: UILabel!
+	@IBOutlet weak var twCustomNotification: UITextView!
+	
+	enum GeofenceType: String {
+		case calendar, custom
+	}
 	
 	let geofenceService = (UIApplication.shared.delegate as! AppDelegate).geofenceService
 	let initialRadius: CLLocationDistance = 500
 	let sliderStep: Float = 100
 	var center: CLLocationCoordinate2D?
+	var selectedGeofenceType : GeofenceType = GeofenceType.calendar
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -64,6 +76,17 @@ class CreateGeofenceController : UIViewController {
 		lblRadius.text = getRadiusString(radius: Int(sliderRadius.value))
 		
 		updateMapView()
+		
+		// Geofence type segmented control
+		segctrlGeofenceType.setTitle("Calendar", forSegmentAt: 0)
+		segctrlGeofenceType.setTitle("Custom", forSegmentAt: 1)
+		onGeofenceTypeCalendarSelected()	// Calendar is the default selection
+		
+		// Custom notification text view
+		twCustomNotification.text = ""
+		twCustomNotification.layer.borderWidth = 1
+		twCustomNotification.layer.cornerRadius = 5
+		twCustomNotification.layer.borderColor = UIColor.lightGray.cgColor
 	}
 	
 	func getRadiusString(radius: Int) -> String {
@@ -105,6 +128,40 @@ class CreateGeofenceController : UIViewController {
 		//let roundedValue = round(sender.value / sliderStep) * sliderStep
 		lblRadius.text = getRadiusString(radius: Int(sender.value))
 		updateMapView()
+	}
+	
+	// Geofence type selection
+	
+	@IBAction func onGeofenceTypeChanged(_ sender: UISegmentedControl) {
+		switch sender.selectedSegmentIndex {
+		case 0:
+			onGeofenceTypeCalendarSelected()
+		case 1:
+			onGeofenceTypeCustomSelected()
+		default:
+			print("Unknown geofence type selected")
+		}
+	}
+	
+	func onGeofenceTypeCalendarSelected() {
+		selectedGeofenceType = GeofenceType.calendar
+		twCustomNotification.isHidden = true;
+		updateGeofenceTypeInstructions()
+	}
+	
+	func onGeofenceTypeCustomSelected() {
+		selectedGeofenceType = GeofenceType.custom
+		twCustomNotification.isHidden = false
+		updateGeofenceTypeInstructions()
+	}
+	
+	func updateGeofenceTypeInstructions() {
+		switch selectedGeofenceType {
+		case GeofenceType.calendar:
+			lblGeofenceTypeInstructions.text = "Select calendar event source"
+		case GeofenceType.custom:
+			lblGeofenceTypeInstructions.text = "Create custom notification"
+		}
 	}
 	
 	// Geofence overlay

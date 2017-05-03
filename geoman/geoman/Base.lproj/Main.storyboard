@@ -103,7 +103,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="9U7-he-Y8h">
-                                <rect key="frame" x="14" y="280.5" width="347" height="51"/>
+                                <rect key="frame" x="14" y="281" width="347" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="atM-jF-6qN"/>
                                 </constraints>
@@ -111,14 +111,53 @@
                                     <action selector="onRadiusSliderValueChanged:" destination="zwD-Au-aeA" eventType="valueChanged" id="nN9-Sa-om7"/>
                                 </connections>
                             </slider>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oFK-Lu-lem">
+                                <rect key="frame" x="16" y="351" width="343" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="223-AK-b0a"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <connections>
+                                    <action selector="onGeofenceTypeChanged:" destination="zwD-Au-aeA" eventType="valueChanged" id="Fbh-48-Bgi"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sxy-Cs-THq">
+                                <rect key="frame" x="16" y="401" width="343" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="rQ3-it-8nf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tNP-T1-acr">
+                                <rect key="frame" x="16" y="431.5" width="343" height="215.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="leadingMargin" secondItem="oFK-Lu-lem" secondAttribute="leading" id="0Hi-bq-38N"/>
+                            <constraint firstItem="Sxy-Cs-THq" firstAttribute="top" secondItem="oFK-Lu-lem" secondAttribute="bottom" constant="20" id="0U6-Ro-B21"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tNP-T1-acr" secondAttribute="trailing" id="8Wc-Z0-OZ3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Sxy-Cs-THq" secondAttribute="trailing" id="Cp0-Fd-NiF"/>
                             <constraint firstItem="V7G-2f-2Uu" firstAttribute="leading" secondItem="CiV-tf-P2O" secondAttribute="leading" id="Hws-RQ-hse"/>
                             <constraint firstAttribute="trailingMargin" secondItem="9U7-he-Y8h" secondAttribute="trailing" id="Iae-tu-sug"/>
                             <constraint firstItem="SMD-w8-FfI" firstAttribute="top" secondItem="V7G-2f-2Uu" secondAttribute="bottom" constant="28" id="L5n-sh-Mlc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="SMD-w8-FfI" secondAttribute="trailing" id="T53-zn-LoZ"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Sxy-Cs-THq" secondAttribute="leading" id="VIH-Ig-JzZ"/>
+                            <constraint firstItem="tBb-5b-EOs" firstAttribute="top" secondItem="tNP-T1-acr" secondAttribute="bottom" constant="20" id="Wn5-Ak-ozc"/>
+                            <constraint firstItem="tNP-T1-acr" firstAttribute="top" secondItem="Sxy-Cs-THq" secondAttribute="bottom" constant="10" id="Wy8-pv-uhg"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="tNP-T1-acr" secondAttribute="leading" id="Z7W-ng-AkR"/>
                             <constraint firstAttribute="leadingMargin" secondItem="9U7-he-Y8h" secondAttribute="leading" id="anV-SJ-JID"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oFK-Lu-lem" secondAttribute="trailing" id="dDM-2j-704"/>
+                            <constraint firstItem="oFK-Lu-lem" firstAttribute="top" secondItem="9U7-he-Y8h" secondAttribute="bottom" constant="20" id="hXG-VG-vns"/>
                             <constraint firstAttribute="leadingMargin" secondItem="SMD-w8-FfI" secondAttribute="leading" id="lVi-bF-lTE"/>
                             <constraint firstItem="V7G-2f-2Uu" firstAttribute="top" secondItem="Txg-lq-sGN" secondAttribute="bottom" id="mB5-ax-k6e"/>
                             <constraint firstItem="9U7-he-Y8h" firstAttribute="top" secondItem="SMD-w8-FfI" secondAttribute="bottom" constant="8" id="oox-Fj-VqZ"/>
@@ -127,9 +166,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="Create geofence" id="R9k-aE-71o"/>
                     <connections>
+                        <outlet property="lblGeofenceTypeInstructions" destination="Sxy-Cs-THq" id="jwJ-13-bxQ"/>
                         <outlet property="lblRadius" destination="SMD-w8-FfI" id="onF-J6-ViT"/>
                         <outlet property="mapView" destination="V7G-2f-2Uu" id="aUI-oU-c6n"/>
+                        <outlet property="segctrlGeofenceType" destination="oFK-Lu-lem" id="45N-05-F9u"/>
                         <outlet property="sliderRadius" destination="9U7-he-Y8h" id="Xbo-JG-dAA"/>
+                        <outlet property="twCustomNotification" destination="tNP-T1-acr" id="ppN-Nb-nOw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pbh-eT-JK7" userLabel="First Responder" sceneMemberID="firstResponder"/>
