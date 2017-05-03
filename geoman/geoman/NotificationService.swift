@@ -10,7 +10,7 @@ import Foundation
 import UserNotifications
 import UserNotificationsUI
 
-class NotificationService: NSObject {
+class NotificationService: Service {
 	
 	// TODO Show proper notifications
 	

@@ -133,7 +133,6 @@ class CreateGeofenceController : UIViewController {
 		}
 		
 		// Add the geofence
-		// TODO Don't want to return from the add geofence operation until we get confirmation from the location manager
 		if let center = center {
 			let radius: CLLocationDistance = CLLocationDistance(Int(sliderRadius.value));
 			
@@ -141,7 +140,13 @@ class CreateGeofenceController : UIViewController {
 			if (selectedGeofenceType == GeofenceType.calendar) {
 				let geofence = CalendarEventGeofence(name: "Calendar geofence", center: center, radius: radius, calendarId: selectedCalendarName)
 				print("Creating \(selectedGeofenceType) geofence at \(center) with radius \(radius) and calendar name \(selectedCalendarName)")
-				geofenceService.addGeofence(geofence: geofence)
+				geofenceService.addGeofence(geofence: geofence, onCompletion: {(success: Bool, message: String) -> Void in
+					if success {
+						self.onCreateGeofenceSuccess()
+					} else {
+						self.onCreateGeofenceFailure()
+					}
+				})
 			}
 			else if (selectedGeofenceType == GeofenceType.custom) {
 				var finalNotificationText: String = ""
@@ -150,18 +155,41 @@ class CreateGeofenceController : UIViewController {
 				}
 				let geofence = CustomGeofence(name: "Custom geofence", center: center, radius: radius, customNotification: finalNotificationText)
 				print("Creating \(selectedGeofenceType) geofence at \(center) with radius \(radius) and custom notification text \(finalNotificationText)")
-				geofenceService.addGeofence(geofence: geofence)
+				geofenceService.addGeofence(geofence: geofence, onCompletion: {(success: Bool, message: String) -> Void in
+					if success {
+						self.onCreateGeofenceSuccess()
+					} else {
+						self.onCreateGeofenceFailure()
+					}
+				})
 			}
 			else {
 				print("Could not create geofence: Unknown geofence type")
 			}
-			
-			// Dismiss controller and go back
-			self.dismiss(animated: true, completion: {});
 		}
 		else {
 			print("CreateGeofenceController.onBtnCreateGeofencePressed: ERROR - Do not have a center value")
 		}
+	}
+	
+	func onCreateGeofenceSuccess() {
+		// Dismiss controller and go back
+		self.dismiss(animated: true, completion: {});
+	}
+	
+	func onCreateGeofenceFailure() {
+		// Show error message
+		let alert = UIAlertController(
+			title: "Error",
+			message: "Could not add geofence",
+			preferredStyle: UIAlertControllerStyle.alert
+		)
+		alert.addAction(UIAlertAction(
+			title: "OK",
+			style: UIAlertActionStyle.default,
+			handler: nil)
+		)
+		self.present(alert, animated: true, completion: nil)
 	}
 	
 	func centerAndZoomMapToCoordinate(coordinate: CLLocationCoordinate2D, radius: CLLocationDistance) {
@@ -312,7 +340,6 @@ extension CreateGeofenceController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		selectedCalendarName = calendarNames[indexPath.row]
-		print("Selected calendar name!: \(selectedCalendarName)")
 	}
 }
 

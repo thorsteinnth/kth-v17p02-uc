@@ -10,9 +10,10 @@ import Foundation
 import UIKit
 import CoreLocation
 
-class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the extension to work
+class GeofenceService : Service {
 
 	let locationManager = CLLocationManager()
+	var pendingLocationManagerRequests = [String : AsyncCompletionHandler]()
 	
 	override init() {
 		super.init()
@@ -25,41 +26,58 @@ class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the ex
 		}
 	}
 	
-	func addGeofence(geofence: Geofence) {
+	func addGeofence(geofence: Geofence, onCompletion: @escaping AsyncCompletionHandler) {
 		// Adapted from: https://www.raywenderlich.com/136165/core-location-geofencing-tutorial
-		
-		// TODO Throw custom exceptions
 		
 		// Check if geofencing supported on this device
 		if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
 			print("Error: Geofencing not supported on this device")
+			onCompletion(false, "Geofencing is not supported on this device")
 			return
 		}
 		
+		// Check if we have the needed permissions
 		if CLLocationManager.authorizationStatus() != .authorizedAlways {
-			print("Warning: Location permissions are needed for geofencing to work")
+			print("Error: Location permissions are needed for geofencing to work")
+			onCompletion(false, "Location permissions are needed for geofencing to work")
+			return
 		}
 		
+		// Register geofence with location manager
+		// Add geofence to pending set
+		pendingLocationManagerRequests[geofence.sUUID] = {(success: Bool, message: String) -> Void in
+			if success {
+				self.saveGeofence(geofence: geofence)
+				onCompletion(true, message)
+			}
+			else {
+				onCompletion(false, message)
+			}
+		}
 		let region = covertGeofenceToCircularRegion(geofence: geofence)
 		locationManager.startMonitoring(for: region)
+	}
+	
+	func saveGeofence(geofence: Geofence) {
 		
-		// Save geofence
-        if let data = UserDefaults.standard.object(forKey: "geofenceDict") as? NSData {
-            var geofenceDict = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as! [String: Geofence]
-            geofenceDict[geofence.sUUID] = geofence
-            let data = NSKeyedArchiver.archivedData(withRootObject: geofenceDict)
-            UserDefaults.standard.set(data, forKey: "geofenceDict")
-        }
-        else {
-            var geofenceDict = [String: Geofence]()
-            geofenceDict[geofence.sUUID] = geofence
-            let data = NSKeyedArchiver.archivedData(withRootObject: geofenceDict)
-            UserDefaults.standard.set(data, forKey: "geofenceDict")
-        }
+		if let data = UserDefaults.standard.object(forKey: "geofenceDict") as? NSData {
+			var geofenceDict = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as! [String: Geofence]
+			geofenceDict[geofence.sUUID] = geofence
+			let data = NSKeyedArchiver.archivedData(withRootObject: geofenceDict)
+			UserDefaults.standard.set(data, forKey: "geofenceDict")
+		}
+		else {
+			var geofenceDict = [String: Geofence]()
+			geofenceDict[geofence.sUUID] = geofence
+			let data = NSKeyedArchiver.archivedData(withRootObject: geofenceDict)
+			UserDefaults.standard.set(data, forKey: "geofenceDict")
+		}
+		
+		print("Saved geofence: \(geofence)")
 	}
 	
 	func getAllGeofences() -> Array<Geofence> {
-        
+		
         if let data = UserDefaults.standard.object(forKey: "geofenceDict") as? NSData {
             let geofenceDict = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as! [String: Geofence]
             let geofences = [Geofence](geofenceDict.values)
@@ -92,6 +110,7 @@ class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the ex
     func addMetroGeofences() {
         
         // Add predetermined Metro Geofences
+		// TODO Handle if we are unable to add these geofences
         
         let radius: CLLocationDistance = 500;
         
@@ -99,31 +118,41 @@ class GeofenceService : NSObject {	// NOTE: Have to subclass NSObject for the ex
         let tCentralenId = "9001"
         let tCentralenCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.325665364, 18.056499774)
         let tCentralen = MetroGeofence(name: "T-Centralen", center: tCentralenCenter, radius: radius, stationId: tCentralenId)
-        addGeofence(geofence: tCentralen)
-        
+		addGeofence(geofence: tCentralen, onCompletion: {(success: Bool, message: String) -> Void in
+			// Do nothing
+		})
+		
         //Odenplan
         let odenplanId = "9117"
         let odenplanCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.338998644, 18.042666496)
         let odenplan = MetroGeofence(name: "Odenplan", center: odenplanCenter, radius: radius, stationId: odenplanId)
-        addGeofence(geofence: odenplan)
-        
+		addGeofence(geofence: odenplan, onCompletion: {(success: Bool, message: String) -> Void in
+			// Do nothing
+		})
+		
         //Ropsten
         let ropstenId = "9220"
         let ropstenCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.354331916, 18.100999596)
         let ropsten = MetroGeofence(name: "Ropsten", center: ropstenCenter, radius: radius, stationId: ropstenId)
-        addGeofence(geofence: ropsten)
-        
+		addGeofence(geofence: ropsten, onCompletion: {(success: Bool, message: String) -> Void in
+			// Do nothing
+		})
+		
         //Kista
         let kistaId = "9302"
         let KistaCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.40166506, 17.938496246)
         let kista = MetroGeofence(name: "Kista", center: KistaCenter, radius: radius, stationId: kistaId)
-        addGeofence(geofence: kista)
-        
+		addGeofence(geofence: kista, onCompletion: {(success: Bool, message: String) -> Void in
+			// Do nothing
+		})
+		
         //Fridhemsplan
         let fridhemsplanId = "9115"
         let fridhemsplanCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.326165362, 18.0249999)
         let fridhemsplan = MetroGeofence(name: "Fridhemsplan", center: fridhemsplanCenter, radius: radius, stationId: fridhemsplanId)
-        addGeofence(geofence: fridhemsplan)
+		addGeofence(geofence: fridhemsplan, onCompletion: {(success: Bool, message: String) -> Void in
+			// Do nothing
+		})
     }
 	
 	func displayNotificationForGeofence(geofence: Geofence) {
@@ -253,10 +282,20 @@ extension GeofenceService: CLLocationManagerDelegate {
 	
 	func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
 		print("CLLocationManager.didStartMonitoringForRegion: \(region)")
+		if let pendingGeofenceCompletionHandler = pendingLocationManagerRequests[region.identifier] {
+			pendingGeofenceCompletionHandler(true, "Started monitoring geofence with ID \(region.identifier)")
+		}
+		pendingLocationManagerRequests.removeValue(forKey: region.identifier)
 	}
 	
 	func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
 		print("CLLocationManager.monitoringDidFailForRegion: \(String(describing: region)) with error: \(error)")
+		if let region = region {
+			if let pendingGeofenceCompletionHandler = pendingLocationManagerRequests[region.identifier] {
+				pendingGeofenceCompletionHandler(false, "Error: \(error)")
+			}
+			pendingLocationManagerRequests.removeValue(forKey: region.identifier)
+		}
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

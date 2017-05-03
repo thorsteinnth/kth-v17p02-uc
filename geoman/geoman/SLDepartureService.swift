@@ -1,7 +1,7 @@
 
 import Foundation
 
-class SLDepartureService {
+class SLDepartureService : Service {
     
     static func getSLDepartures(stationCode: String, completion: @escaping ([SLDeparture]) -> Void) {
         

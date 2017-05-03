@@ -2,7 +2,7 @@
 import Foundation
 import EventKit
 
-class CalendarEventService {
+class CalendarEventService : Service {
     
     static func getNextCalendarEvents(calendarEventId: String) -> [CalendarEvent] {
         

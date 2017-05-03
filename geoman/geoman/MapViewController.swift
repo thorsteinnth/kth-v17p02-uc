@@ -120,8 +120,7 @@ class MapViewController: UIViewController {
 				createGeofenceController.center = newGeofenceCenter
 			}
 		}
-	}
-	
+	}	
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -131,7 +130,7 @@ extension MapViewController: MKMapViewDelegate {
 	// We could do it with the CLLocationManager, but the MKMapViewDelegate is easier
 	
 	func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-		print("MKMapViewDelegate - user location updated: \(userLocation)")
+		//print("MKMapViewDelegate - user location updated: \(userLocation)")
 		mapView.setCenter(userLocation.coordinate, animated: true)
 	}
 	
