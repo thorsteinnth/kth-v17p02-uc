@@ -114,12 +114,27 @@ class CreateGeofenceController : UIViewController {
 	}
 	
 	func onCreateGeofenceBarButtonItemPressed(sender: Any) {
-		// TODO Create geofence of the correct type
 		if let center = center {
 			let radius: CLLocationDistance = CLLocationDistance(Int(sliderRadius.value));
-			print("Creating geofence at \(center) with radius \(radius)")
-			let geofence = CalendarEventGeofence(name: "test geofence", center: center, radius: radius, calendarId: "KTH")
-			geofenceService.addGeofence(geofence: geofence)
+			
+			// TODO What about geofence names? Do we want to have those?
+			if (selectedGeofenceType == GeofenceType.calendar) {
+				let geofence = CalendarEventGeofence(name: "Calendar geofence", center: center, radius: radius, calendarId: selectedCalendarName)
+				print("Creating \(selectedGeofenceType) geofence at \(center) with radius \(radius) and calendar name \(selectedCalendarName)")
+				geofenceService.addGeofence(geofence: geofence)
+			}
+			else if (selectedGeofenceType == GeofenceType.custom) {
+				var finalNotificationText: String = ""
+				if let notificationTextInput = twCustomNotification.text {
+					finalNotificationText = notificationTextInput
+				}
+				let geofence = CustomGeofence(name: "Custom geofence", center: center, radius: radius, customNotification: finalNotificationText)
+				print("Creating \(selectedGeofenceType) geofence at \(center) with radius \(radius) and custom notification text \(finalNotificationText)")
+				geofenceService.addGeofence(geofence: geofence)
+			}
+			else {
+				print("Could not create geofence: Unknown geofence type")
+			}
 			
 			// Dismiss controller and go back
 			self.dismiss(animated: true, completion: {});
