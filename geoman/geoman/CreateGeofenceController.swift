@@ -114,6 +114,26 @@ class CreateGeofenceController : UIViewController {
 	}
 	
 	func onCreateGeofenceBarButtonItemPressed(sender: Any) {
+		
+		// Verify that the user has selected a calendar
+		if selectedGeofenceType == GeofenceType.calendar && selectedCalendarName == "" {
+			// Show alert asking user to select a calendar
+			let alert = UIAlertController(
+				title: "Please select calendar",
+				message: "Please select what calendar events you want to see for this geofence",
+				preferredStyle: UIAlertControllerStyle.alert
+			)
+			alert.addAction(UIAlertAction(
+				title: "OK",
+				style: UIAlertActionStyle.default,
+				handler: nil)
+			)
+			self.present(alert, animated: true, completion: nil)
+			return
+		}
+		
+		// Add the geofence
+		// TODO Don't want to return from the add geofence operation until we get confirmation from the location manager
 		if let center = center {
 			let radius: CLLocationDistance = CLLocationDistance(Int(sliderRadius.value));
 			
