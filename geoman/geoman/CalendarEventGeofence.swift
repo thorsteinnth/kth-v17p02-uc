@@ -1,10 +1,3 @@
-//
-//  CalendarEventGeofence.swift
-//  geoman
-//
-//  Created by Þorsteinn Þorri Sigurðsson on 01/05/2017.
-//  Copyright © 2017 ttsifannar. All rights reserved.
-//
 
 import CoreLocation
 
@@ -16,6 +9,17 @@ class CalendarEventGeofence : Geofence {
 		self.calendarId = calendarId
 		super.init(name: name, center: center, radius: radius)
 	}
+    
+    // MARK: NSCoding
+    required init?(coder decoder: NSCoder) {
+        calendarId = decoder.decodeObject(forKey: "calendarId") as! String
+        super.init(coder: decoder)
+    }
+    
+    override func encode(with coder: NSCoder) {
+        coder.encode(self.calendarId, forKey: "calendarId")
+        super.encode(with: coder)
+    }
 	
 	public override var description: String {
 		return "CalendarEventGeofence: sUUID: \(sUUID) - name: \(name) - center: \(center) - radius: \(radius) - calendarId: \(calendarId)"
