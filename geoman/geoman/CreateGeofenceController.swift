@@ -17,7 +17,7 @@ class CreateGeofenceController : UIViewController {
 	@IBOutlet weak var sliderRadius: UISlider!
 	
 	let geofenceService = (UIApplication.shared.delegate as! AppDelegate).geofenceService
-	let initialRadius: CLLocationDistance = 500;
+	let initialRadius: CLLocationDistance = 500
 	let sliderStep: Float = 100
 	var center: CLLocationCoordinate2D?
 	
@@ -49,7 +49,6 @@ class CreateGeofenceController : UIViewController {
 		if let center = center {
 			let mapPin = MapPin(title: "", subtitle: "", coordinate: center)
 			mapView.addAnnotation(mapPin)
-			centerAndZoomMapToCoordinate(coordinate: center)
 		} else {
 			print("CreateGeofenceController.viewDidLoad: ERROR - Do not have a center value")
 		}
@@ -62,6 +61,8 @@ class CreateGeofenceController : UIViewController {
 		
 		// Radius label
 		lblRadius.text = getRadiusString(radius: sliderRadius.value)
+		
+		updateMapView()
 	}
 	
 	func getRadiusString(radius: Float) -> String {
@@ -89,9 +90,14 @@ class CreateGeofenceController : UIViewController {
 		}
 	}
 	
-	func centerAndZoomMapToCoordinate(coordinate: CLLocationCoordinate2D) {
-		let regionRadius: CLLocationDistance = 1000
-		let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius * 2.0, regionRadius * 2.0)
+	func centerAndZoomMapToCoordinate(coordinate: CLLocationCoordinate2D, radius: CLLocationDistance) {
+		let minRadius: CLLocationDistance = 500
+		var radiusToShow: CLLocationDistance = minRadius
+		if (radius > minRadius) {
+			radiusToShow = radius
+		}
+		// The length given in RegionMakeWithDistance is diameter. We show the radius we want to show plus a little extra.
+		let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate, radiusToShow * 2.3, radiusToShow * 2.3)
 		mapView.setRegion(coordinateRegion, animated: true)
 	}
 	
@@ -99,6 +105,41 @@ class CreateGeofenceController : UIViewController {
 		// We want the slider to return values with preset increments
 		let roundedValue = round(sender.value / sliderStep) * sliderStep
 		lblRadius.text = getRadiusString(radius: roundedValue)
+		updateMapView()
+	}
+	
+	// Geofence overlay
+	
+	func redrawGeofenceCircleOnMap(center: CLLocationCoordinate2D, radius: CLLocationDistance) {
+		// Remove current geofence circles, if any
+		let currentOverlays = mapView.overlays
+		mapView.removeOverlays(currentOverlays)
+		// Geofences are circles, represented with the MapCircle object
+		let mapCircle = MapCircle(center: center, radius: radius)
+		mapCircle.color = UIColor.blue
+		mapView.add(mapCircle)
+	}
+	
+	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+		// This gets called when we add an overlay to the MKMapView
+		if overlay is MapCircle {
+			let circleRenderer = MKCircleRenderer(overlay: overlay)
+			circleRenderer.strokeColor = (overlay as! MapCircle).color
+			circleRenderer.fillColor = circleRenderer.strokeColor!.withAlphaComponent(0.1)
+			circleRenderer.lineWidth = 1
+			return circleRenderer
+		}
+		
+		// Unknown overlay type, return empty overlay renderer (can't return nil)
+		return MKOverlayRenderer()
+	}
+	
+	func updateMapView() {
+		if let center = center {
+			let radius: CLLocationDistance = CLLocationDistance(sliderRadius.value)
+			redrawGeofenceCircleOnMap(center: center, radius: radius)
+			centerAndZoomMapToCoordinate(coordinate: center, radius: radius)
+		}
 	}
 }
 
