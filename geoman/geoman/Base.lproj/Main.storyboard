@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -88,9 +89,48 @@
                     <view key="view" contentMode="scaleToFill" id="CiV-tf-P2O">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="V7G-2f-2Uu">
+                                <rect key="frame" x="0.0" y="64" width="375" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="nFm-6v-uw0"/>
+                                </constraints>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMD-w8-FfI">
+                                <rect key="frame" x="16" y="232" width="343" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="9U7-he-Y8h">
+                                <rect key="frame" x="14" y="280.5" width="347" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="atM-jF-6qN"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="onRadiusSliderValueChanged:" destination="zwD-Au-aeA" eventType="valueChanged" id="nN9-Sa-om7"/>
+                                </connections>
+                            </slider>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="V7G-2f-2Uu" firstAttribute="leading" secondItem="CiV-tf-P2O" secondAttribute="leading" id="Hws-RQ-hse"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9U7-he-Y8h" secondAttribute="trailing" id="Iae-tu-sug"/>
+                            <constraint firstItem="SMD-w8-FfI" firstAttribute="top" secondItem="V7G-2f-2Uu" secondAttribute="bottom" constant="28" id="L5n-sh-Mlc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="SMD-w8-FfI" secondAttribute="trailing" id="T53-zn-LoZ"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="9U7-he-Y8h" secondAttribute="leading" id="anV-SJ-JID"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="SMD-w8-FfI" secondAttribute="leading" id="lVi-bF-lTE"/>
+                            <constraint firstItem="V7G-2f-2Uu" firstAttribute="top" secondItem="Txg-lq-sGN" secondAttribute="bottom" id="mB5-ax-k6e"/>
+                            <constraint firstItem="9U7-he-Y8h" firstAttribute="top" secondItem="SMD-w8-FfI" secondAttribute="bottom" constant="8" id="oox-Fj-VqZ"/>
+                            <constraint firstAttribute="trailing" secondItem="V7G-2f-2Uu" secondAttribute="trailing" id="rSA-w6-1eI"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Create geofence" id="R9k-aE-71o"/>
+                    <connections>
+                        <outlet property="lblRadius" destination="SMD-w8-FfI" id="onF-J6-ViT"/>
+                        <outlet property="mapView" destination="V7G-2f-2Uu" id="aUI-oU-c6n"/>
+                        <outlet property="sliderRadius" destination="9U7-he-Y8h" id="Xbo-JG-dAA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pbh-eT-JK7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
