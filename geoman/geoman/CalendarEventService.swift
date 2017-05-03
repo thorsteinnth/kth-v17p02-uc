@@ -44,4 +44,25 @@ class CalendarEventService {
         
         return calendarEvents
     }
+    
+    static func getCalendarTitles() -> [String] {
+        
+        var calendars: [String] = []
+        
+        let eventStore = EKEventStore()
+        
+        let authorizationStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
+        
+        if authorizationStatus == EKAuthorizationStatus.authorized {
+            
+            let cals = eventStore.calendars(for: EKEntityType.event)
+            
+            for calendar in cals {
+                
+                calendars.append(calendar.title)
+            }
+        }
+        
+        return calendars
+    }
 }
