@@ -116,3 +116,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension UIViewController {
+	
+	// Extension to allow dismissal of keyboard in view controllers
+	// Adapted from: http://stackoverflow.com/a/27079103
+	
+	func hideKeyboardWhenTappedAround() {
+		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+		tap.cancelsTouchesInView = false
+		view.addGestureRecognizer(tap)
+	}
+	
+	func dismissKeyboard() {
+		view.endEditing(true)
+	}
+}

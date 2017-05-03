@@ -35,6 +35,7 @@ class CreateGeofenceController : UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		self.hideKeyboardWhenTappedAround()
 		
 		// Close button
 		let btnClose = UIBarButtonItem(
@@ -87,6 +88,11 @@ class CreateGeofenceController : UIViewController {
 		twCustomNotification.layer.borderWidth = 1
 		twCustomNotification.layer.cornerRadius = 5
 		twCustomNotification.layer.borderColor = UIColor.lightGray.cgColor
+		
+		// Keyboard handling
+		// Adapted from: http://stackoverflow.com/a/31124676
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 	}
 	
 	func getRadiusString(radius: Int) -> String {
@@ -197,6 +203,24 @@ class CreateGeofenceController : UIViewController {
 			let radius: CLLocationDistance = CLLocationDistance(sliderRadius.value)
 			redrawGeofenceCircleOnMap(center: center, radius: radius)
 			centerAndZoomMapToCoordinate(coordinate: center, radius: radius)
+		}
+	}
+	
+	// Keyboard handling
+	
+	func keyboardWillShow(notification: NSNotification) {
+		if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+			if self.view.frame.origin.y == 0 {
+				self.view.frame.origin.y -= keyboardSize.height
+			}
+		}
+	}
+	
+	func keyboardWillHide(notification: NSNotification) {
+		if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+			if self.view.frame.origin.y != 0 {
+				self.view.frame.origin.y += keyboardSize.height
+			}
 		}
 	}
 }
