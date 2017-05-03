@@ -19,6 +19,9 @@ class MapViewController: UIViewController {
 	// Stored as an instance variable so we can use it in the prepareForSegue() method
 	var newGeofenceCenter: CLLocationCoordinate2D?
 	
+	// Used to zoom to the users location when we get the first location measurement
+	var initialZoomToLocationDone: Bool = false
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -125,14 +128,15 @@ class MapViewController: UIViewController {
 
 extension MapViewController: MKMapViewDelegate {
 	
-	// We use the mapview delegate to update the map
-	// It only updates the user's location when he moves, not continuously
-	// We could do it with the CLLocationManager, but the MKMapViewDelegate is easier
-	
 	func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-		// TODO Only zoom when we get location for the first time
 		//print("MKMapViewDelegate - user location updated: \(userLocation)")
-		//mapView.setCenter(userLocation.coordinate, animated: true)
+		
+		// Zoom to the user's location if this is the first location reading we get.
+		if !initialZoomToLocationDone {
+			// We show a radius of 2 km around the user
+			let coordinateRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 2000, 2000)
+			mapView.setRegion(coordinateRegion, animated: true)
+			initialZoomToLocationDone = true
+		}
 	}
-	
 }
