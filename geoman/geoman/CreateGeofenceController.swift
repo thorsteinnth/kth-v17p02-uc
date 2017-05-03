@@ -12,26 +12,28 @@ import CoreLocation
 
 class CreateGeofenceController : UIViewController {
 
-	// TODO Need to add scrolling to this controller
-	// Scroll so that text view is visible when keyboard opens
-	// Also need it for landscape
+	// TODO Allow scrolling in landscape mode
 	
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var lblRadius: UILabel!
 	@IBOutlet weak var sliderRadius: UISlider!
 	@IBOutlet weak var segctrlGeofenceType: UISegmentedControl!
 	@IBOutlet weak var lblGeofenceTypeInstructions: UILabel!
-	@IBOutlet weak var twCustomNotification: UITextView!
+	@IBOutlet weak var twCustomNotification: UITextView!	// TODO Fix typo
+	@IBOutlet weak var tableViewCalendars: UITableView!
 	
 	enum GeofenceType: String {
 		case calendar, custom
 	}
 	
 	let geofenceService = (UIApplication.shared.delegate as! AppDelegate).geofenceService
+	let calendarNames: [String] = CalendarEventService.getCalendarTitles()
+	let tableViewCellReuseIdentifier = "cell"
 	let initialRadius: CLLocationDistance = 500
 	let sliderStep: Float = 100
 	var center: CLLocationCoordinate2D?
 	var selectedGeofenceType : GeofenceType = GeofenceType.calendar
+	var selectedCalendarName: String = ""
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -88,6 +90,14 @@ class CreateGeofenceController : UIViewController {
 		twCustomNotification.layer.borderWidth = 1
 		twCustomNotification.layer.cornerRadius = 5
 		twCustomNotification.layer.borderColor = UIColor.lightGray.cgColor
+		
+		// Calendar table view
+		tableViewCalendars.register(UITableViewCell.self, forCellReuseIdentifier: tableViewCellReuseIdentifier)
+		tableViewCalendars.delegate = self
+		tableViewCalendars.dataSource = self
+		tableViewCalendars.layer.borderWidth = 1
+		tableViewCalendars.layer.cornerRadius = 5
+		tableViewCalendars.layer.borderColor = UIColor.lightGray.cgColor
 		
 		// Keyboard handling
 		// Adapted from: http://stackoverflow.com/a/31124676
@@ -151,12 +161,14 @@ class CreateGeofenceController : UIViewController {
 	
 	func onGeofenceTypeCalendarSelected() {
 		selectedGeofenceType = GeofenceType.calendar
+		tableViewCalendars.isHidden = false;
 		twCustomNotification.isHidden = true;
 		updateGeofenceTypeInstructions()
 	}
 	
 	func onGeofenceTypeCustomSelected() {
 		selectedGeofenceType = GeofenceType.custom
+		tableViewCalendars.isHidden = true
 		twCustomNotification.isHidden = false
 		updateGeofenceTypeInstructions()
 	}
@@ -248,6 +260,24 @@ extension CreateGeofenceController: MKMapViewDelegate {
 			return view
 		}
 		return nil
+	}
+}
+
+extension CreateGeofenceController: UITableViewDelegate, UITableViewDataSource {
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return calendarNames.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell: UITableViewCell = tableViewCalendars.dequeueReusableCell(withIdentifier: tableViewCellReuseIdentifier) as UITableViewCell!
+		cell.textLabel?.text = calendarNames[indexPath.row]
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		selectedCalendarName = calendarNames[indexPath.row]
+		print("Selected calendar name!: \(selectedCalendarName)")
 	}
 }
 
