@@ -91,7 +91,7 @@ class CreateGeofenceController : UIViewController {
 	}
 	
 	func centerAndZoomMapToCoordinate(coordinate: CLLocationCoordinate2D, radius: CLLocationDistance) {
-		let minRadius: CLLocationDistance = 500
+		let minRadius: CLLocationDistance = 200
 		var radiusToShow: CLLocationDistance = minRadius
 		if (radius > minRadius) {
 			radiusToShow = radius
