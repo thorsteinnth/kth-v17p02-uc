@@ -136,9 +136,8 @@ class CreateGeofenceController : UIViewController {
 		if let center = center {
 			let radius: CLLocationDistance = CLLocationDistance(Int(sliderRadius.value));
 			
-			// TODO What about geofence names? Do we want to have those?
 			if (selectedGeofenceType == GeofenceType.calendar) {
-				let geofence = CalendarEventGeofence(name: "Calendar geofence", center: center, radius: radius, calendarId: selectedCalendarName)
+				let geofence = CalendarEventGeofence(center: center, radius: radius, calendarId: selectedCalendarName)
 				print("Creating \(selectedGeofenceType) geofence at \(center) with radius \(radius) and calendar name \(selectedCalendarName)")
 				geofenceService.addGeofence(geofence: geofence, onCompletion: {(success: Bool, message: String) -> Void in
 					if success {
@@ -153,7 +152,7 @@ class CreateGeofenceController : UIViewController {
 				if let notificationTextInput = twCustomNotification.text {
 					finalNotificationText = notificationTextInput
 				}
-				let geofence = CustomGeofence(name: "Custom geofence", center: center, radius: radius, customNotification: finalNotificationText)
+				let geofence = CustomGeofence(center: center, radius: radius, customNotification: finalNotificationText)
 				print("Creating \(selectedGeofenceType) geofence at \(center) with radius \(radius) and custom notification text \(finalNotificationText)")
 				geofenceService.addGeofence(geofence: geofence, onCompletion: {(success: Bool, message: String) -> Void in
 					if success {

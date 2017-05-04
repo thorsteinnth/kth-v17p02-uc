@@ -5,9 +5,9 @@ class CustomGeofence : Geofence {
 
 	var customNotification: String
 	
-	init(name: String, center: CLLocationCoordinate2D, radius: CLLocationDistance, customNotification: String) {
+	init(center: CLLocationCoordinate2D, radius: CLLocationDistance, customNotification: String) {
 		self.customNotification = customNotification
-		super.init(name: name, center: center, radius: radius)
+		super.init(center: center, radius: radius)
 	}
     
     // MARK: NSCoding
@@ -26,6 +26,6 @@ class CustomGeofence : Geofence {
 	}
 	
 	public override var description: String {
-		return "CustomGeofence: sUUID: \(sUUID) - name: \(name) - center: \(center) - radius: \(radius) - customNotification: \(customNotification)"
+		return "CustomGeofence: sUUID: \(sUUID) - center: \(center) - radius: \(radius) - customNotification: \(customNotification)"
 	}
 }

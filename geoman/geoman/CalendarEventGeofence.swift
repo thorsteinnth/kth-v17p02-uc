@@ -5,9 +5,9 @@ class CalendarEventGeofence : Geofence {
 	
 	let calendarId: String
 	
-	init(name: String, center: CLLocationCoordinate2D, radius: CLLocationDistance, calendarId: String) {
+	init(center: CLLocationCoordinate2D, radius: CLLocationDistance, calendarId: String) {
 		self.calendarId = calendarId
-		super.init(name: name, center: center, radius: radius)
+		super.init(center: center, radius: radius)
 	}
     
     // MARK: NSCoding
@@ -22,7 +22,7 @@ class CalendarEventGeofence : Geofence {
     }
 	
 	public override var description: String {
-		return "CalendarEventGeofence: sUUID: \(sUUID) - name: \(name) - center: \(center) - radius: \(radius) - calendarId: \(calendarId)"
+		return "CalendarEventGeofence: sUUID: \(sUUID) - center: \(center) - radius: \(radius) - calendarId: \(calendarId)"
 	}
 }
 
