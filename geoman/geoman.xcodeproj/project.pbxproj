@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		394CFE451EBE98DE00C65243 /* geoman_short_test_wpt.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 394CFE441EBE98DE00C65243 /* geoman_short_test_wpt.gpx */; };
 		395A8C981EB746C100A91DF7 /* GeofenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395A8C971EB746C100A91DF7 /* GeofenceService.swift */; };
 		395A8C9A1EB75E9600A91DF7 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395A8C991EB75E9600A91DF7 /* NotificationService.swift */; };
 		395A8C9E1EB772C300A91DF7 /* CustomGeofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395A8C9D1EB772C300A91DF7 /* CustomGeofence.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		394CFE441EBE98DE00C65243 /* geoman_short_test_wpt.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = geoman_short_test_wpt.gpx; path = "geoman/gpx routes/geoman_short_test_wpt.gpx"; sourceTree = "<group>"; };
 		395A8C971EB746C100A91DF7 /* GeofenceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeofenceService.swift; sourceTree = "<group>"; };
 		395A8C991EB75E9600A91DF7 /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		395A8C9D1EB772C300A91DF7 /* CustomGeofence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGeofence.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 		397903481EAA06C0009D0FE0 = {
 			isa = PBXGroup;
 			children = (
+				394CFE441EBE98DE00C65243 /* geoman_short_test_wpt.gpx */,
 				39EC67A51EBE90AB00BD686A /* geoman_test_wpt.gpx */,
 				397903531EAA06C0009D0FE0 /* geoman */,
 				3979036B1EAA06C0009D0FE0 /* geomanTests */,
@@ -323,6 +326,7 @@
 			files = (
 				39EC67A61EBE90AB00BD686A /* geoman_test_wpt.gpx in Resources */,
 				397903621EAA06C0009D0FE0 /* LaunchScreen.storyboard in Resources */,
+				394CFE451EBE98DE00C65243 /* geoman_short_test_wpt.gpx in Resources */,
 				3979035F1EAA06C0009D0FE0 /* Assets.xcassets in Resources */,
 				3979035A1EAA06C0009D0FE0 /* Main.storyboard in Resources */,
 			);
