@@ -5,7 +5,7 @@ class SLDepartureService : Service {
     
     static func getSLDepartures(stationCode: String, completion: @escaping ([SLDeparture]) -> Void) {
 		
-		// Timewindow in minutes
+		// Timewindow in minutes, max 60. Let's make it 60 to handle late night departures where trains leave at like 30 minute intervals.
         let urlEndpoint = "https://api.sl.se/api2/realtimedeparturesV4.json?key=9359c8fdf04d4954943cba911ed09428&siteid=" + stationCode + "&timewindow=60"
         
         guard let url = URL(string: urlEndpoint) else {

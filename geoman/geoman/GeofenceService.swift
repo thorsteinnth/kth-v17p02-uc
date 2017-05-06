@@ -304,7 +304,8 @@ class GeofenceService : Service {
         SLDepartureService.getSLDepartures(stationCode: stationId) { departures in
             
             if departures.count > 0 {
-                
+				
+				var departureCount: Int = 0
                 for departure in departures {
 					
 					// Departure should always be the geofence station
@@ -315,7 +316,16 @@ class GeofenceService : Service {
                     body += departure.destination
                     body += " - \(departure.displayTime) "
                     body += "\n"
+					
+					// Let's only show the next 6 departures
+					if departureCount >= 5 {
+						break
+					}
+					
+					departureCount = departureCount + 1
                 }
+				
+				print("Notification body: \(body)")
                 
                 notificationService.showLocalNotification(
                     title: title,
