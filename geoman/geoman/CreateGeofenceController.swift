@@ -12,7 +12,7 @@ import CoreLocation
 
 class CreateGeofenceController : UIViewController {
 
-	// TODO Allow scrolling in landscape mode
+	// TODO Allow scrolling in landscape mode or disallow landscape in the app
 	
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var lblRadius: UILabel!
@@ -62,7 +62,7 @@ class CreateGeofenceController : UIViewController {
 		
 		// Add pin annotation to the center of the geofence we want to create
 		if let center = center {
-			let mapPin = MapPin(title: "", subtitle: "", coordinate: center)
+			let mapPin = MapPin(title: "", subtitle: "", coordinate: center, geofenceId: "")
 			mapView.addAnnotation(mapPin)
 		} else {
 			print("CreateGeofenceController.viewDidLoad: ERROR - Do not have a center value")

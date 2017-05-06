@@ -45,7 +45,7 @@ class MapViewController: UIViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		refreshGeofenceOverlays()
+		refreshGeofenceOverlaysAndAnnotations()
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -53,10 +53,12 @@ class MapViewController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 	
-	func refreshGeofenceOverlays() {
-		// Remove all existing overlays from the map
+	func refreshGeofenceOverlaysAndAnnotations() {
+		// Remove all existing overlays and annotations from the map
 		let overlays = mapView.overlays
 		mapView.removeOverlays(overlays)
+		let annotations = mapView.annotations
+		mapView.removeAnnotations(annotations)
 		// Redraw all existing geofences
 		let geofences = geofenceService.getAllGeofences()
 		for geofence in geofences {
@@ -65,10 +67,26 @@ class MapViewController: UIViewController {
 	}
 	
 	func drawGeofenceOnMap(geofence: Geofence) {
-		// Geofences are circles
+		// Geofences are circles, add circle overlay
 		let mapCircle = MapCircle(center: geofence.center, radius: geofence.radius)
 		mapCircle.color = UIColor.blue
 		mapView.add(mapCircle)
+		// Add pin annotation in center of geofence
+		var annotationTitle: String
+		switch geofence {
+		case is MetroGeofence:
+			let metroGeofence = geofence as! MetroGeofence
+			annotationTitle = metroGeofence.name
+		case is CalendarEventGeofence:
+			let calendarGeofence = geofence as! CalendarEventGeofence
+			annotationTitle = "Calendar: \(calendarGeofence.calendarId)"
+		case is CustomGeofence:
+			annotationTitle = "Custom geofence"
+		default:
+			annotationTitle = ""
+		}
+		let mapPin = MapPin(title: annotationTitle, subtitle: "", coordinate: geofence.center, geofenceId: geofence.sUUID)
+		mapView.addAnnotation(mapPin)
 	}
 	
 	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -114,6 +132,77 @@ class MapViewController: UIViewController {
 		self.present(alert, animated: true, completion: nil)
 	}
 	
+	// Show options for geofences
+	
+	func showOptionsForGeofence(geofenceId: String)
+	{
+		let geofence = geofenceService.getGeofenceWithId(id: geofenceId)
+		if let geofence = geofence {
+			if geofence is CustomGeofence || geofence is CalendarEventGeofence {
+				showOptionsForUserCreatedGeofence(geofence: geofence)
+			}
+			else if geofence is MetroGeofence {
+				showOptionsForMetroGeofence(geofence: geofence as! MetroGeofence)
+			}
+			else {
+				print("Unkown geofence type - can't show options for it")
+			}
+		}
+		else {
+			print("Could not find geofence with ID: \(geofenceId)")
+		}
+	}
+	
+	func showOptionsForUserCreatedGeofence(geofence: Geofence) {
+		// Show delete geofence alert
+		let alert = UIAlertController(
+			title: "Delete geofence",
+			message: "Do you want to delete this geofence?",
+			preferredStyle: UIAlertControllerStyle.alert
+		)
+		alert.addAction(UIAlertAction(
+			title: "Yes",
+			style: UIAlertActionStyle.default,
+			handler: {(alert: UIAlertAction!) in self.deleteGeofence(geofence: geofence)})
+		)
+		alert.addAction(UIAlertAction(
+			title: "Cancel",
+			style: UIAlertActionStyle.cancel,
+			handler: nil)
+		)
+		self.present(alert, animated: true, completion: nil)
+	}
+	
+	func showOptionsForMetroGeofence(geofence: MetroGeofence) {
+		// Show alert for turning notifications on or off
+		var message: String = ""
+		if geofence.showNotifications {
+			message = "Do you want to turn off notifications for this geofence?"
+		}
+		else {
+			message = "Do you want to turn on notifications for this geofence?"
+		}
+		
+		let alert = UIAlertController(
+			title: "Toggle notifications for geofence",
+			message: message,
+			preferredStyle: UIAlertControllerStyle.alert
+		)
+		alert.addAction(UIAlertAction(
+			title: "Yes",
+			style: UIAlertActionStyle.default,
+			handler: {(alert: UIAlertAction!) in self.toggleNotificationsForMetroGeofence(geofence: geofence)})
+		)
+		alert.addAction(UIAlertAction(
+			title: "Cancel",
+			style: UIAlertActionStyle.cancel,
+			handler: nil)
+		)
+		self.present(alert, animated: true, completion: nil)
+	}
+	
+	// Create geofence
+	
 	func createGeofence(center: CLLocationCoordinate2D) {
 		newGeofenceCenter = center
 		self.performSegue(withIdentifier: "CreateGeofencePresentModallySegue", sender:self)
@@ -125,7 +214,24 @@ class MapViewController: UIViewController {
 				createGeofenceController.center = newGeofenceCenter
 			}
 		}
-	}	
+	}
+	
+	// Edit geofences
+	
+	func deleteGeofence(geofence: Geofence) {
+		// TODO
+		print("Should delete geofence \(geofence)")
+	}
+	
+	func toggleNotificationsForMetroGeofence(geofence: MetroGeofence) {
+		// TODO
+		if geofence.showNotifications {
+			print("Should turn off notifications for geofence: \(geofence)")
+		}
+		else {
+			print("Should turn on notifications for geofence: \(geofence)")
+		}
+	}
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -139,6 +245,36 @@ extension MapViewController: MKMapViewDelegate {
 			let coordinateRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 2000, 2000)
 			mapView.setRegion(coordinateRegion, animated: true)
 			initialZoomToLocationDone = true
+		}
+	}
+	
+	func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+		
+		if let annotation = annotation as? MapPin {
+			
+			let identifier = "pin"
+			var view: MKPinAnnotationView
+			
+			if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView {
+				dequeuedView.annotation = annotation
+				view = dequeuedView
+			} else {
+				view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+				view.canShowCallout = true
+				view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView	// TODO Change button look?
+			}
+			
+			return view
+		}
+		return nil
+	}
+	
+	func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+		if let annotation = view.annotation {
+			if (annotation is MapPin) {
+				let mapPin = annotation as! MapPin
+				showOptionsForGeofence(geofenceId: mapPin.geofenceId)
+			}
 		}
 	}
 }

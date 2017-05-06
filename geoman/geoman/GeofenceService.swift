@@ -88,6 +88,16 @@ class GeofenceService : Service {
         }
 	}
 	
+	func getGeofenceWithId(id: String) -> Geofence? {
+		let geofences = getAllGeofences()
+		for geofence in geofences {
+			if geofence.sUUID == id {
+				return geofence
+			}
+		}
+		return nil
+	}
+	
 	func covertGeofenceToCircularRegion(geofence: Geofence) -> CLCircularRegion {
 		let region = CLCircularRegion(center: geofence.center, radius: geofence.radius, identifier: geofence.sUUID)
 		// We just have notify on entry
@@ -117,7 +127,7 @@ class GeofenceService : Service {
         // T-Centralen
         let tCentralenId = "9001"
         let tCentralenCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.325665364, 18.056499774)
-        let tCentralen = MetroGeofence(center: tCentralenCenter, radius: radius, stationId: tCentralenId, name: "T-Centralen")
+		let tCentralen = MetroGeofence(center: tCentralenCenter, radius: radius, stationId: tCentralenId, name: "T-Centralen")
 		addGeofence(geofence: tCentralen, onCompletion: {(success: Bool, message: String) -> Void in
 			// Do nothing
 		})
