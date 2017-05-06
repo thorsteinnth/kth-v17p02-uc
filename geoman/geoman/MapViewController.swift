@@ -15,6 +15,8 @@ class MapViewController: UIViewController {
 	@IBOutlet weak var mapView: MKMapView!
 	let geofenceService = (UIApplication.shared.delegate as! AppDelegate).geofenceService
 	
+	// TODO Update mapview as the hardcoded geofences are added for the first time
+	
 	// Stores the coordinates of the geofence we are about to create
 	// Stored as an instance variable so we can use it in the prepareForSegue() method
 	var newGeofenceCenter: CLLocationCoordinate2D?
