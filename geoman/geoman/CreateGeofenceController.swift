@@ -12,8 +12,6 @@ import CoreLocation
 
 class CreateGeofenceController : UIViewController {
 
-	// TODO Allow scrolling in landscape mode or disallow landscape in the app
-	
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var lblRadius: UILabel!
 	@IBOutlet weak var sliderRadius: UISlider!
