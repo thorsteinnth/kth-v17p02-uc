@@ -180,7 +180,12 @@ class GeofenceService : Service {
 			return
 		case is MetroGeofence:
 			let metroGeofence = geofence as! MetroGeofence
-			displayMetroNotification(notificationService: notificationService, geofenceName: metroGeofence.name, stationId: metroGeofence.stationId)
+			if (metroGeofence.showNotifications) {
+				displayMetroNotification(notificationService: notificationService, geofenceName: metroGeofence.name, stationId: metroGeofence.stationId)
+			}
+			else{
+				print("Not showing notification for metro station geofence \(metroGeofence.name)")
+			}
             return
 		default:
 			print("GeofenceService.displayNotificationForGeofence - Unknown geofence type: \(type(of: geofence))")

@@ -73,19 +73,30 @@ class MapViewController: UIViewController {
 		mapView.add(mapCircle)
 		// Add pin annotation in center of geofence
 		var annotationTitle: String
+		var annotationSubtitle: String
 		switch geofence {
 		case is MetroGeofence:
 			let metroGeofence = geofence as! MetroGeofence
 			annotationTitle = metroGeofence.name
+			if metroGeofence.showNotifications {
+				annotationSubtitle = "Notifications on"
+			}
+			else {
+				annotationSubtitle = "Notifications off"
+			}
 		case is CalendarEventGeofence:
 			let calendarGeofence = geofence as! CalendarEventGeofence
 			annotationTitle = "Calendar: \(calendarGeofence.calendarId)"
+			annotationSubtitle = ""
 		case is CustomGeofence:
+			let customGeofence = geofence as! CustomGeofence
 			annotationTitle = "Custom geofence"
+			annotationSubtitle = customGeofence.customNotification
 		default:
 			annotationTitle = ""
+			annotationSubtitle = ""
 		}
-		let mapPin = MapPin(title: annotationTitle, subtitle: "", coordinate: geofence.center, geofenceId: geofence.sUUID)
+		let mapPin = MapPin(title: annotationTitle, subtitle: annotationSubtitle, coordinate: geofence.center, geofenceId: geofence.sUUID)
 		mapView.addAnnotation(mapPin)
 	}
 	
@@ -175,17 +186,20 @@ class MapViewController: UIViewController {
 	
 	func showOptionsForMetroGeofence(geofence: MetroGeofence) {
 		// Show alert for turning notifications on or off
-		var message: String = ""
+		var alertTitle: String = ""
+		var alertMessage: String = ""
 		if geofence.showNotifications {
-			message = "Do you want to turn off notifications for this geofence?"
+			alertTitle = "Turn off notifications for \(geofence.name)"
+			alertMessage = "Do you want to turn off notifications for \(geofence.name)?"
 		}
 		else {
-			message = "Do you want to turn on notifications for this geofence?"
+			alertTitle = "Turn on notifications for \(geofence.name)"
+			alertMessage = "Do you want to turn on notifications for \(geofence.name)?"
 		}
 		
 		let alert = UIAlertController(
-			title: "Toggle notifications for geofence",
-			message: message,
+			title: alertTitle,
+			message: alertMessage,
 			preferredStyle: UIAlertControllerStyle.alert
 		)
 		alert.addAction(UIAlertAction(
@@ -224,13 +238,10 @@ class MapViewController: UIViewController {
 	}
 	
 	func toggleNotificationsForMetroGeofence(geofence: MetroGeofence) {
-		// TODO
-		if geofence.showNotifications {
-			print("Should turn off notifications for geofence: \(geofence)")
-		}
-		else {
-			print("Should turn on notifications for geofence: \(geofence)")
-		}
+		// Note: Just changing a flag in our object, don't have to do anything with LocationManager
+		geofence.showNotifications = !geofence.showNotifications
+		geofenceService.saveGeofence(geofence: geofence)
+		refreshGeofenceOverlaysAndAnnotations()
 	}
 }
 
