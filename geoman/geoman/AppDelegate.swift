@@ -44,6 +44,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		return true
 	}
+	
+	func initialGeofencesAdded() {
+		// Called by geofence service when the initial hardcoded geofences have been added.
+		// Let's update the overlays and annotations in the MapViewController, if it is the frontmost controller.
+		if let window = self.window {
+			if let rootViewController = window.rootViewController {
+				if rootViewController is UINavigationController {
+					let rootNavController = rootViewController as! UINavigationController
+					if rootNavController.topViewController is MapViewController {
+						let mapViewController = rootNavController.topViewController as! MapViewController
+						mapViewController.refreshGeofenceOverlaysAndAnnotations()
+					}
+				}
+			}
+		}
+	}
 
 	func applicationWillResignActive(_ application: UIApplication) {
 		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

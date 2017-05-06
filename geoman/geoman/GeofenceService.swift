@@ -189,9 +189,16 @@ class GeofenceService : Service {
         let fridhemsplanCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.326165362, 18.0249999)
         let fridhemsplan = MetroGeofence(center: fridhemsplanCenter, radius: radius, stationId: fridhemsplanId, name: "Fridhemsplan")
 		addGeofence(geofence: fridhemsplan, onCompletion: {(success: Bool, message: String) -> Void in
-			// Do nothing
+			// This is the last hardcoded geofence we add
+			// We assume that it will be added last, i.e. that they are added sequentially
+			self.initialGeofencesAdded()
 		})
     }
+	
+	func initialGeofencesAdded() {
+		// Let AppDelegate know that the initial geofences have been added
+		(UIApplication.shared.delegate as! AppDelegate).initialGeofencesAdded()
+	}
 	
 	func displayNotificationForGeofence(geofence: Geofence) {
 		
