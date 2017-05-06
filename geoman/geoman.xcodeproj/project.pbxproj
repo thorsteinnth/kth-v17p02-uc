@@ -20,7 +20,6 @@
 		397903621EAA06C0009D0FE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 397903601EAA06C0009D0FE0 /* LaunchScreen.storyboard */; };
 		3979036D1EAA06C0009D0FE0 /* geomanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3979036C1EAA06C0009D0FE0 /* geomanTests.swift */; };
 		397903781EAA06C0009D0FE0 /* geomanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903771EAA06C0009D0FE0 /* geomanUITests.swift */; };
-		397903861EAA2684009D0FE0 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903851EAA2684009D0FE0 /* MainController.swift */; };
 		397903881EAA27FE009D0FE0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397903871EAA27FE009D0FE0 /* MapViewController.swift */; };
 		39A7C7801EB8B01A00F96486 /* MapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A7C77F1EB8B01A00F96486 /* MapPin.swift */; };
 		39BB6B631EBA277B0033DCB5 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BB6B621EBA277B0033DCB5 /* Service.swift */; };
@@ -69,7 +68,6 @@
 		397903731EAA06C0009D0FE0 /* geomanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = geomanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		397903771EAA06C0009D0FE0 /* geomanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = geomanUITests.swift; sourceTree = "<group>"; };
 		397903791EAA06C0009D0FE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		397903851EAA2684009D0FE0 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		397903871EAA27FE009D0FE0 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		39A7C77F1EB8B01A00F96486 /* MapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPin.swift; sourceTree = "<group>"; };
 		39BB6B621EBA277B0033DCB5 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 		39E69D7D1EB38DBC002949C2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				397903851EAA2684009D0FE0 /* MainController.swift */,
 				397903871EAA27FE009D0FE0 /* MapViewController.swift */,
 				395A8CA51EB7827F00A91DF7 /* CreateGeofenceController.swift */,
 			);
@@ -351,7 +348,6 @@
 				95329DE91EB7625300E72E2F /* CalendarEvent.swift in Sources */,
 				395A8CA21EB7750900A91DF7 /* MetroGeofence.swift in Sources */,
 				397903881EAA27FE009D0FE0 /* MapViewController.swift in Sources */,
-				397903861EAA2684009D0FE0 /* MainController.swift in Sources */,
 				397903551EAA06C0009D0FE0 /* AppDelegate.swift in Sources */,
 				39BB6B631EBA277B0033DCB5 /* Service.swift in Sources */,
 				39E69D7A1EB366B1002949C2 /* MapCircle.swift in Sources */,
