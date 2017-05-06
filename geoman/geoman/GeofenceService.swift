@@ -90,7 +90,7 @@ class GeofenceService : Service {
 	
 	func covertGeofenceToCircularRegion(geofence: Geofence) -> CLCircularRegion {
 		let region = CLCircularRegion(center: geofence.center, radius: geofence.radius, identifier: geofence.sUUID)
-		// TODO Allow user to set notify rules
+		// We just have notify on entry
 		region.notifyOnEntry = true
 		region.notifyOnExit = false
 		return region
