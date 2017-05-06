@@ -54,12 +54,28 @@ class GeofenceService : Service {
 				onCompletion(false, message)
 			}
 		}
-		let region = covertGeofenceToCircularRegion(geofence: geofence)
+		let region = convertGeofenceToCircularRegion(geofence: geofence)
 		locationManager.startMonitoring(for: region)
 	}
 	
+	func removeGeofence(geofence: Geofence, onCompletion: AsyncCompletionHandler) {
+		// NOTE: There is no callback for the stopMonitoringForRegion method
+		let region = convertGeofenceToCircularRegion(geofence: geofence)
+		locationManager.stopMonitoring(for: region)
+		let regionIsMonitored: Bool = locationManager.monitoredRegions.contains(region)
+		if !regionIsMonitored {
+			print("Stopped monitoring geofence: \(geofence) --- Number of monitored regions: \(locationManager.monitoredRegions.count)")
+			deleteGeofence(geofence: geofence)
+			onCompletion(true, "")
+		}
+		else {
+			print("Error: Region for geofence still monitored: \(geofence)")
+			onCompletion(false, "")
+		}
+	}
+	
 	func saveGeofence(geofence: Geofence) {
-		
+		// Add/update geofence to/in our local set of geofences
 		if let data = UserDefaults.standard.object(forKey: "geofenceDict") as? NSData {
 			var geofenceDict = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as! [String: Geofence]
 			geofenceDict[geofence.sUUID] = geofence
@@ -74,6 +90,18 @@ class GeofenceService : Service {
 		}
 		
 		print("Saved geofence: \(geofence)")
+	}
+	
+	func deleteGeofence(geofence: Geofence) {
+		// Delete geofence from our local set of geofences
+		if let data = UserDefaults.standard.object(forKey: "geofenceDict") as? NSData {
+			var geofenceDict = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as! [String: Geofence]
+			geofenceDict.removeValue(forKey: geofence.sUUID)
+			let data = NSKeyedArchiver.archivedData(withRootObject: geofenceDict)
+			UserDefaults.standard.set(data, forKey: "geofenceDict")
+		}
+		
+		print("Deleted geofence: \(geofence)")
 	}
 	
 	func getAllGeofences() -> Array<Geofence> {
@@ -98,7 +126,7 @@ class GeofenceService : Service {
 		return nil
 	}
 	
-	func covertGeofenceToCircularRegion(geofence: Geofence) -> CLCircularRegion {
+	func convertGeofenceToCircularRegion(geofence: Geofence) -> CLCircularRegion {
 		let region = CLCircularRegion(center: geofence.center, radius: geofence.radius, identifier: geofence.sUUID)
 		// We just have notify on entry
 		region.notifyOnEntry = true
@@ -300,7 +328,7 @@ extension GeofenceService: CLLocationManagerDelegate {
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
-		print("CLLocationManager.didStartMonitoringForRegion: \(region)")
+		print("CLLocationManager.didStartMonitoringForRegion: \(region) --- Number of monitored regions: \(locationManager.monitoredRegions.count)")
 		if let pendingGeofenceCompletionHandler = pendingLocationManagerRequests[region.identifier] {
 			pendingGeofenceCompletionHandler(true, "Started monitoring geofence with ID \(region.identifier)")
 		}
@@ -308,7 +336,7 @@ extension GeofenceService: CLLocationManagerDelegate {
 	}
 	
 	func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
-		print("CLLocationManager.monitoringDidFailForRegion: \(String(describing: region)) with error: \(error)")
+		print("CLLocationManager.monitoringDidFailForRegion: \(String(describing: region)) with error: \(error) --- Number of monitored regions: \(locationManager.monitoredRegions.count)")
 		if let region = region {
 			if let pendingGeofenceCompletionHandler = pendingLocationManagerRequests[region.identifier] {
 				pendingGeofenceCompletionHandler(false, "Error: \(error)")

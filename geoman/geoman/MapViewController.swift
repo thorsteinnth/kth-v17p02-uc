@@ -233,8 +233,22 @@ class MapViewController: UIViewController {
 	// Edit geofences
 	
 	func deleteGeofence(geofence: Geofence) {
-		// TODO
-		print("Should delete geofence \(geofence)")
+		geofenceService.removeGeofence(geofence: geofence, onCompletion: {(success: Bool, message: String) -> Void in
+			if !success {
+				let alert = UIAlertController(
+					title: "Error",
+					message: "Could not delete geofence",
+					preferredStyle: UIAlertControllerStyle.alert
+				)
+				alert.addAction(UIAlertAction(
+					title: "OK",
+					style: UIAlertActionStyle.default,
+					handler: nil)
+				)
+				self.present(alert, animated: true, completion: nil)
+			}
+			refreshGeofenceOverlaysAndAnnotations()
+		})
 	}
 	
 	func toggleNotificationsForMetroGeofence(geofence: MetroGeofence) {
