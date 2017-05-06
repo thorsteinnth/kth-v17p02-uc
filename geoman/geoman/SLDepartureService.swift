@@ -4,8 +4,9 @@ import Foundation
 class SLDepartureService : Service {
     
     static func getSLDepartures(stationCode: String, completion: @escaping ([SLDeparture]) -> Void) {
-        
-        let urlEndpoint = "https://api.sl.se/api2/realtimedeparturesV4.json?key=9359c8fdf04d4954943cba911ed09428&siteid=" + stationCode + "&timewindow=20"
+		
+		// Timewindow in minutes
+        let urlEndpoint = "https://api.sl.se/api2/realtimedeparturesV4.json?key=9359c8fdf04d4954943cba911ed09428&siteid=" + stationCode + "&timewindow=60"
         
         guard let url = URL(string: urlEndpoint) else {
             print("Error: cannot create URL")

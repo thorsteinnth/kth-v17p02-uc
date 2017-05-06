@@ -146,47 +146,107 @@ class GeofenceService : Service {
     }
     
     func addMetroGeofences() {
-        
-        // Add predetermined Metro Geofences
+		
+		// TODO Get station IDs from SL Platsuppslag API
 		// TODO Handle if we are unable to add these geofences
+		// GPS coord source: https://www.gps-coordinates.net/
+		// Station ID source: https://www.trafiklab.se/api/sl-platsuppslag/sl-platsuppslag-dokumentation
+		
+		/*
+		Station IDs and lat-long
+		T-Centralen 9001 59.3306315,18.059330000000045
+		Odenplan 9117 59.34294790000001,18.049898999999982
+		Ropsten 9220 59.3572983,18.102217900000028
+		Kista 9302 59.4031774,17.942394400000012
+		Fridhemsplan 9115 59.33219949999999,18.029187800000045
+		Slussen 9192 59.31951240000001,18.07214060000001
+		Radhuset 9309 59.33033229999999,18.042047700000012
+		Tekniska Högskolan 9204 59.3459088,18.071596399999976
+		Gamla Stan 9193 59.323108163701576,18.067381381988525
+		Gullmarsplan 9189 59.2990447,18.080944899999963
+		Stadshagen 9307 59.3382823,18.013847499999997
+		Liljeholmen 9294 59.3101636,18.02225909999993
+		*/
+		
+        let radius: CLLocationDistance = 200;
         
-        let radius: CLLocationDistance = 500;
-        
-        // T-Centralen
+        // T-Centralen 9001 59.3306315,18.059330000000045
         let tCentralenId = "9001"
-        let tCentralenCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.325665364, 18.056499774)
+        let tCentralenCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.3306315,18.059330000000045)
 		let tCentralen = MetroGeofence(center: tCentralenCenter, radius: radius, stationId: tCentralenId, name: "T-Centralen")
 		addGeofence(geofence: tCentralen, onCompletion: {(success: Bool, message: String) -> Void in
 			// Do nothing
 		})
 		
-        //Odenplan
+        // Odenplan 9117 59.34294790000001,18.049898999999982
         let odenplanId = "9117"
-        let odenplanCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.338998644, 18.042666496)
+        let odenplanCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.34294790000001,18.049898999999982)
         let odenplan = MetroGeofence(center: odenplanCenter, radius: radius, stationId: odenplanId, name: "Odenplan")
 		addGeofence(geofence: odenplan, onCompletion: {(success: Bool, message: String) -> Void in
 			// Do nothing
 		})
 		
-        //Ropsten
+        // Ropsten 9220 59.3572983,18.102217900000028
         let ropstenId = "9220"
-        let ropstenCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.354331916, 18.100999596)
+        let ropstenCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.3572983,18.102217900000028)
         let ropsten = MetroGeofence(center: ropstenCenter, radius: radius, stationId: ropstenId, name: "Ropsten")
 		addGeofence(geofence: ropsten, onCompletion: {(success: Bool, message: String) -> Void in
 			// Do nothing
 		})
 		
-        //Kista
+        // Kista 9302 59.4031774,17.942394400000012
         let kistaId = "9302"
-        let KistaCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.40166506, 17.938496246)
+        let KistaCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.4031774,17.942394400000012)
         let kista = MetroGeofence(center: KistaCenter, radius: radius, stationId: kistaId, name: "Kista")
 		addGeofence(geofence: kista, onCompletion: {(success: Bool, message: String) -> Void in
 			// Do nothing
 		})
 		
-        //Fridhemsplan
+		// Slussen 9192 59.31951240000001,18.07214060000001
+		let slussen = MetroGeofence(center: CLLocationCoordinate2DMake(59.31951240000001,18.07214060000001), radius: radius, stationId: "9192", name: "Slussen")
+		addGeofence(geofence: slussen, onCompletion: {(success: Bool, message: String) -> Void in
+			// Do nothing
+		})
+		
+		// Radhuset 9309 59.33033229999999,18.042047700000012
+		let radhuset = MetroGeofence(center: CLLocationCoordinate2DMake(59.33033229999999,18.042047700000012), radius: radius, stationId: "9309", name: "Rådhuset")
+		addGeofence(geofence: radhuset, onCompletion: {(success: Bool, message: String) -> Void in
+			// Do nothing
+		})
+		
+		// Tekniska Högskolan 9204 59.3459088,18.071596399999976
+		let tekniskahogskolan = MetroGeofence(center: CLLocationCoordinate2DMake(59.3459088,18.071596399999976), radius: radius, stationId: "9204", name: "Tekniska Högskolan")
+		addGeofence(geofence: tekniskahogskolan, onCompletion: {(success: Bool, message: String) -> Void in
+			// Do nothing
+		})
+		
+		// Gamla Stan 9193 59.323108163701576,18.067381381988525
+		let gamlastan = MetroGeofence(center: CLLocationCoordinate2DMake(59.323108163701576,18.067381381988525), radius: radius, stationId: "9193", name: "Gamla Stan")
+		addGeofence(geofence: gamlastan, onCompletion: {(success: Bool, message: String) -> Void in
+			// Do nothing
+		})
+		
+		// Gullmarsplan 9189 59.2990447,18.080944899999963
+		let gullmarsplan = MetroGeofence(center: CLLocationCoordinate2DMake(59.2990447,18.080944899999963), radius: radius, stationId: "9189", name: "Gullmarsplan")
+		addGeofence(geofence: gullmarsplan, onCompletion: {(success: Bool, message: String) -> Void in
+			// Do nothing
+		})
+		
+		// Stadshagen 9307 59.3382823,18.013847499999997
+		let stadshagen = MetroGeofence(center: CLLocationCoordinate2DMake(59.3382823,18.013847499999997), radius: radius, stationId: "9307", name: "Stadshagen")
+		addGeofence(geofence: stadshagen, onCompletion: {(success: Bool, message: String) -> Void in
+			// Do nothing
+		})
+		
+		//Liljeholmen 9294 59.3101636,18.02225909999993
+		let liljeholmen = MetroGeofence(center: CLLocationCoordinate2DMake(59.3101636,18.02225909999993), radius: radius, stationId: "9294", name: "Liljeholmen")
+		addGeofence(geofence: liljeholmen, onCompletion: {(success: Bool, message: String) -> Void in
+			// Do nothing
+		})
+		
+        // Fridhemsplan 9115 59.33219949999999,18.029187800000045
         let fridhemsplanId = "9115"
-        let fridhemsplanCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.326165362, 18.0249999)
+        let fridhemsplanCenter: CLLocationCoordinate2D = CLLocationCoordinate2DMake(59.33219949999999,18.029187800000045)
         let fridhemsplan = MetroGeofence(center: fridhemsplanCenter, radius: radius, stationId: fridhemsplanId, name: "Fridhemsplan")
 		addGeofence(geofence: fridhemsplan, onCompletion: {(success: Bool, message: String) -> Void in
 			// This is the last hardcoded geofence we add
