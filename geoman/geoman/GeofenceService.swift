@@ -313,8 +313,9 @@ class GeofenceService : Service {
                     //    subTitle += "Station: \(departure.station)"
                     //}
                     
-                    body += departure.destination
-                    body += " - \(departure.displayTime) "
+                    body += "T\(departure.lineNumber)"
+					body += " - \(departure.destination)"
+                    body += " - \(departure.displayTime)"
                     body += "\n"
 					
 					// Let's only show the next 6 departures
@@ -324,9 +325,7 @@ class GeofenceService : Service {
 					
 					departureCount = departureCount + 1
                 }
-				
-				print("Notification body: \(body)")
-                
+			
                 notificationService.showLocalNotification(
                     title: title,
                     subTitle: subTitle,

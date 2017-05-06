@@ -14,6 +14,7 @@ struct SLDeparture {
     let transportMode: TransportMode
     let station: String
     let line: GroupOfLine
+	let lineNumber: String
     let destination: String
     let displayTime: String
     let direction: Int
@@ -40,7 +41,11 @@ extension SLDeparture {
         guard let groupOfLine = json["GroupOfLine"] as? String else {
             throw SerializationError.missing("groupOfLine")
         }
-        
+		
+		guard let lineNumber = json["LineNumber"] as? String else {
+			throw SerializationError.missing("lineNumber")
+		}
+		
         guard let destination = json["Destination"] as? String else {
             throw SerializationError.missing("destination")
         }
@@ -81,5 +86,6 @@ extension SLDeparture {
         self.destination = destination
         self.displayTime = displayTime
         self.direction = direction
+		self.lineNumber = lineNumber
     }
 }
