@@ -26,6 +26,7 @@
 		39BB6B631EBA277B0033DCB5 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BB6B621EBA277B0033DCB5 /* Service.swift */; };
 		39E69D7A1EB366B1002949C2 /* MapCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E69D791EB366B1002949C2 /* MapCircle.swift */; };
 		39E69D7F1EB38EAD002949C2 /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E69D7E1EB38EAD002949C2 /* Geofence.swift */; };
+		39E7E0A21EC210150088FA24 /* geoman_test_kista.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 39E7E0A11EC210150088FA24 /* geoman_test_kista.gpx */; };
 		39EC67A61EBE90AB00BD686A /* geoman_test_wpt.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 39EC67A51EBE90AB00BD686A /* geoman_test_wpt.gpx */; };
 		95329DE71EB7613000E72E2F /* CalendarEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95329DE61EB7613000E72E2F /* CalendarEventService.swift */; };
 		95329DE91EB7625300E72E2F /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95329DE81EB7625300E72E2F /* CalendarEvent.swift */; };
@@ -76,6 +77,7 @@
 		39BB6B621EBA277B0033DCB5 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		39E69D791EB366B1002949C2 /* MapCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCircle.swift; sourceTree = "<group>"; };
 		39E69D7E1EB38EAD002949C2 /* Geofence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geofence.swift; sourceTree = "<group>"; };
+		39E7E0A11EC210150088FA24 /* geoman_test_kista.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = geoman_test_kista.gpx; path = "geoman/gpx routes/geoman_test_kista.gpx"; sourceTree = "<group>"; };
 		39EC67A51EBE90AB00BD686A /* geoman_test_wpt.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = geoman_test_wpt.gpx; path = "geoman/gpx routes/geoman_test_wpt.gpx"; sourceTree = "<group>"; };
 		95329DE61EB7613000E72E2F /* CalendarEventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventService.swift; sourceTree = "<group>"; };
 		95329DE81EB7625300E72E2F /* CalendarEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEvent.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 		397903481EAA06C0009D0FE0 = {
 			isa = PBXGroup;
 			children = (
+				39E7E0A11EC210150088FA24 /* geoman_test_kista.gpx */,
 				394CFE441EBE98DE00C65243 /* geoman_short_test_wpt.gpx */,
 				39EC67A51EBE90AB00BD686A /* geoman_test_wpt.gpx */,
 				397903531EAA06C0009D0FE0 /* geoman */,
@@ -327,6 +330,7 @@
 				39EC67A61EBE90AB00BD686A /* geoman_test_wpt.gpx in Resources */,
 				397903621EAA06C0009D0FE0 /* LaunchScreen.storyboard in Resources */,
 				394CFE451EBE98DE00C65243 /* geoman_short_test_wpt.gpx in Resources */,
+				39E7E0A21EC210150088FA24 /* geoman_test_kista.gpx in Resources */,
 				3979035F1EAA06C0009D0FE0 /* Assets.xcassets in Resources */,
 				3979035A1EAA06C0009D0FE0 /* Main.storyboard in Resources */,
 			);
